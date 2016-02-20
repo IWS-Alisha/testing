@@ -1,0 +1,48 @@
+<div class="parentdiv">
+    <header>
+        <h2> Captured Expenses </h2>
+    </header>
+    <img class="doneBttn" src="images/addBtn.png" alt="AddBtn" ng-click="newExpense()">
+    <div id="processed" ng-show="ExpensesExist">
+        <div id="expenseDetail">
+            <div class="expenseRow" ng-repeat="GroupItems in Expenses | groupBy:'dateTime' ">
+                <div class="GroupTitle">
+                    <div></div>
+                    <p>{{GroupItems[0].dateTime | date:'EEE, dd mm-yy'}}</p>
+                </div>
+                <div class="Group" ng-repeat="DocItem in GroupItems | orderBy:'-Id'" ng-click="editExpense(DocItem.Id)" ng-class="GroupBorder($last)">
+                    <div class="demoInfo">
+                        <img id="ProducName" ng-src="data:image/png;base64,{{DocItem.code}}" />
+                    </div>
+                    <div id="ExpenseDesc">
+                        <p>{{DocItem.description}}</p>
+                    </div>
+                    <div id="ExpenseImg" align="center"><img ng-show="DocItem.corporateCard !== null && DocItem.fileData === 0  && DocItem.projectCard === null" ng-src="images/credit_card.png" />
+                        <img ng-show="DocItem.corporateCard !== null && DocItem.fileData !== 0 && DocItem.projectCard === null" ng-src="images/camera_and_card.png" />
+                        <img ng-show="DocItem.fileData !== 0  && DocItem.corporateCard === null && DocItem.projectCard === null" ng-src="images/camera_icon.png" />
+                        <img ng-show="DocItem.fileData === 0  && DocItem.projectCard !== null && DocItem.corporateCard === null" ng-src="images/customer.png" />
+                        <img ng-show="DocItem.fileData !== 0  && DocItem.projectCard !== null && DocItem.corporateCard === null" ng-src="images/camera_and_customer.png" />
+                        <img ng-show="DocItem.corporateCard !== null  && DocItem.projectCard !== null && DocItem.fileData === 0 " ng-src="images/card_and_customer.png" />
+                        <img ng-show="DocItem.corporateCard !== null  && DocItem.projectCard !== null && DocItem.fileData !== 0 " ng-src="images/card_and_customer_and_camera.png" />
+                    </div>
+                    <div id="ExpensePrice" align="center">
+                        <p> {{DocItem.amount}} {{DocItem.currency}} </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="subDiv" ng-hide="ExpensesExist">
+        <p id="listText"> The list is empty</p>
+        <br>
+        <pre>Tap to add item</pre>
+        <img id="arrowImage" src="images/arrow.png" alt="arrow">
+    </div>
+</div>
+<!-- <div class="BackBtn" ng-show="showBackBtn" ng-click="back()" on-long-press="back()">
+    <img src="images/back.png">
+</div> -->
+<div id="Back" ng-click="back()" on-long-press="back()" ng-show="showBackBtn">
+    <div><img src="images/back.png">
+    </div>
+</div>

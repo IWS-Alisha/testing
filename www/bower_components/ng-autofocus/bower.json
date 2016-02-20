@@ -1,0 +1,45 @@
+{
+  "name": "ng-autofocus",
+  "version": "0.0.2",
+  "description": "An AngularJS directive that mimics the HTML input attribute autofocus when the directive is displayed",
+  "main": [
+    "dist/ng-autofocus.js"
+  ],
+  "dependencies": {
+    "angular": ">= 1.2.5"
+  },
+  "devDependencies": {
+    "requirejs": "~2.1.15"
+  },
+  "moduleType": [
+    "globals"
+  ],
+  "keywords": [
+    "ng-autofocus",
+    "autofocus",
+    "focus",
+    "angularjs",
+    "angular"
+  ],
+  "authors": [
+    {
+      "name": "https://github.com/jljouannic/ng-autofocus/graphs/contributors"
+    }
+  ],
+  "homepage": "http://jljouannic.github.io/ng-autofocus/",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jljouannic/ng-autofocus.git"
+  },
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "test",
+    "public",
+    "src",
+    "index.html",
+    "gulpfile.js",
+    "package.json"
+  ]
+}

@@ -1,0 +1,32 @@
+<div id="registerForm">
+    <div id="RegisterTitle">
+        <div id="Back" ng-click="back()" on-long-press="back()" ng-show="BackButton">
+            <div><img src="images/back.png">
+            </div>
+        </div>
+        <div id="Title">
+        </div>
+    </div>
+    <img class="logo" src="images/slingshot.png" alt="slinghot">
+    <input type="submit" id="regBtn" ng-click="submit(userId, password, serverId, serverApp)" on-long-press="submit(userId, password, serverId, serverApp)" value="Please register with the server" ng-focus="setScroll(true)"></input>
+    <div id="registrationForm" class="base">
+        <label id="userId">User ID</label>
+        <input type="text" ng-model="userId" id="userInput" ng-change="TextWatcher(userId, password, serverId, serverApp)" ng-focus="setScroll(true, -10)" ng-blur="setScroll(true, 0)" />
+        <label id="passwd">Password</label>
+        <input type="password" ng-model="password" id="passInput" ng-change="TextWatcher(userId, password, serverId, serverApp)" ng-focus="setScroll(false, -16)" ng-blur="setScroll(false, 0)" />
+        <label id="address">Server Address</label>
+        <input type="text" ng-model="serverId" id="addressInput" ng-change="TextWatcher(userId, password, serverId, serverApp)" ng-focus="setScroll(false, -34)" ng-blur="setScroll(false, 0)" />
+        <label id="serverApp">Server Application</label>
+        <input type="text" ng-model="serverApp" id="appInput" ng-change="TextWatcher(userId, password, serverId, serverApp)" ng-focus="setScroll(false, -37)" ng-blur="setScroll(true, 0)" />
+    </div>
+    <div id="registerOuter">
+    </div>
+</div>
+<div id="OverleyCounter" ng-show="showLoader">
+    <div class="loader" ng-activity-indicator="SpinnerDark"></div>
+</div>
+<div id="mainPage" ng-show="splash">
+    <img id="logo" src="images/slingshot.png" alt="slinghot">
+    <h1 id="textApp">{{appName}}</h1>
+    <h1 id="capture">{{appVersion}}</h1>
+</div>

@@ -1,0 +1,281 @@
+#uploadresult {
+    background: url(../images/bkg.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center fixed;
+    vertical-align: middle;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    left: 0%;
+    top: 0%;
+}
+
+#uploadresult > #UploadResultTitle {
+    position: absolute;
+    top: 0%;
+    left: 0%;
+    width: 100%;
+    height: 9%;
+    background: #274DA0;
+    text-align: center;
+}
+
+#uploadresult > #UploadResultTitle > #Back {
+    position: absolute;
+    top: 0%;
+    left: 0%;
+    width: 15%;
+    height: 100%;
+    display: table;
+}
+
+#uploadresult > #UploadResultTitle > #Back:active {
+    opacity: .70;
+}
+
+#uploadresult > #UploadResultTitle > #Back > div {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+#uploadresult > #UploadResultTitle > #Back > div > img {
+    width: 50%;
+    height: auto;
+}
+
+#uploadresult > #UploadResultTitle > #Title {
+    position: absolute;
+    top: 0%;
+    left: 10%;
+    width: 85%;
+    height: 100%;
+    text-align: center;
+    display: table;
+}
+
+#uploadresult > #UploadResultTitle > #Title > p {
+    display: table-cell;
+    vertical-align: middle;
+    color: white;
+    font-size: 4.5vw;
+}
+
+#uploadresult > #UploadResultBody {
+    position: absolute;
+    top: 9%;
+    left: 0%;
+    width: 100%;
+    height: 91%;
+    color: #333333;
+    overflow-x: hidden;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+#uploadresult > #UploadResultBody > .UploadResultRow {
+    padding-right: 3%;
+    padding-left: 3%;
+    padding-top: 3%;
+    border-bottom: 1px solid #d3d3d3;
+}
+
+#uploadresult > #UploadResultBody > .UploadResultRow > * {
+    padding: 0%;
+    margin: 0%;
+}
+
+#uploadresult > #UploadResultBody > .UploadResultRow > #UploadResultDescr > * {
+    display: inline-block;
+    padding: 0%;
+    margin: 0%;
+    color: #333333;
+    font-size: 3.5vw;
+}
+
+#uploadresult > #UploadResultBody > .UploadResultRow > #UploadResultDescr > #DocStatus {
+    width: 7%;
+    height: auto;
+    vertical-align: top;
+    padding-top: 1%;
+}
+
+#uploadresult > #UploadResultBody > .UploadResultRow > #UploadResultDescr > #ErrorDesc {
+    width: 65%;
+    height: auto;
+    vertical-align: top;
+    padding-left: 2%;
+    line-height: 130%;
+    text-align: justify;
+    text-justify: inter-word;
+}
+
+#uploadresult > #UploadResultBody > .UploadResultRow > #UploadResultDescr > #ErrorBtn {
+    float: right;
+    font-size: 3vw;
+    background: #ce4b4b;
+    background: -webkit-radial-gradient(#ce4b4b, #b94343);
+    /* Safari 5.1 to 6.0 */
+    background: -o-radial-gradient(#ce4b4b, #b94343);
+    /* For Opera 11.6 to 12.0 */
+    background: -moz-radial-gradient(#ce4b4b, #b94343);
+    /* For Firefox 3.6 to 15 */
+    background: radial-gradient(#ce4b4b, #b94343);
+    padding: .7%;
+    text-align: center;
+    padding-right: 2.5%;
+    padding-left: 2.5%;
+    border-radius: 7px;
+    -moz-border-radius: 7px;
+    -webkit-border-radius: 7px;
+}
+
+#uploadresult > #UploadResultBody > .UploadResultRow > #UploadResultMsg {
+    font-size: 3.75vw;
+    padding: 0%;
+    margin: 0%;
+    color: red;
+    line-height: 130%;
+    text-align: justify;
+    text-justify: inter-word;
+}
+
+
+/* ********************************************************************** */
+
+#uploadresult > #UploadResultBody {
+    position: absolute;
+    top: 9%;
+    left: 0%;
+    width: 100%;
+    height: 91%;
+    color: #333333;
+    overflow-x: hidden;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+#uploadresult > #UploadResultBody > .UploadResultItem {
+    padding-right: 3%;
+    padding-left: 3%;
+    padding-top: 3%;
+}
+
+#uploadresult > #UploadResultBody > .UploadResultItem > * {
+    padding: 0%;
+    margin: 0%;
+}
+
+#uploadresult > #UploadResultBody > .UploadResultItem > #UploadResultDescr > * {
+    display: inline-block;
+    padding: 0%;
+    margin: 0%;
+    color: #333333;
+    font-size: 3.9vw;
+}
+
+#uploadresult > #UploadResultBody > .UploadResultItem > #UploadResultDescr > #DocStatus {
+    width: 11%;
+    height: auto;
+    vertical-align: top;
+    padding-top: 1%;
+}
+
+#uploadresult > #UploadResultBody > .UploadResultItem > #UploadResultDescr > #DocDesc {
+    width: 80%;
+    height: auto;
+    vertical-align: top;
+    padding-left: 2%;
+    line-height: 130%;
+    text-align: justify;
+    text-justify: inter-word;
+}
+
+#uploadresult > #UploadResultBody > .UploadResultItem > #UploadResultMsg > * {
+    padding: 0%;
+    margin: 0%;
+}
+
+#uploadresult > #UploadResultBody > .UploadResultItem > #UploadResultMsg > #Massage {
+    font-size: 4.7vw;
+    padding: 0%;
+    margin: 0%;
+    color: red;
+    margin-top: 2%;
+    margin-bottom: 2%;
+}
+
+#uploadresult > #UploadResultBody > .UploadResultItem > #UploadResultMsg > #ErrorDesc {
+    font-size: 4vw;
+    padding: 0%;
+    margin: 0%;
+    line-height: 130%;
+    text-align: justify;
+    text-justify: inter-word;
+}
+
+#uploadresult > #UploadResultBody > #sendReport {
+    position: fixed;
+    bottom: 0;
+    margin-bottom: 15%;
+    background: #eee9e9;
+    background: -webkit-linear-gradient(#777474, #adadad);
+    background: -o-linear-gradient(#777474, #adadad);
+    background: -moz-linear-gradient(#777474, #adadad);
+    background: linear-gradient(#777474, #adadad);
+    border: 0;
+    height: 5%;
+    width: 30%;
+    padding-left: 3%;
+    padding-right: 3%;
+    font-size: 4vw;
+    border-radius: 7px;
+    -moz-border-radius: 7px;
+    -webkit-border-radius: 7px;
+    left: 35%;
+}
+
+#uploadresult > #UploadResultBody > #sendReport:active {
+    -webkit-box-shadow: none !important;
+    -moz-box-shadow: none !important;
+    box-shadow: none !important;
+    background: -webkit-linear-gradient(#adadad, #eee9e9);
+    background: -o-linear-gradient(#adadad, #eee9e9);
+    background: -moz-linear-gradient(#adadad, #eee9e9);
+    background: linear-gradient(#adadad, #eee9e9);
+}
+
+#sendReport:focus,
+#sendReport:active {
+    outline: 0;
+}
+
+.BackBtn {
+    position: absolute;
+    top: 89%;
+    left: 7%;
+    width: 10%;
+    height: 7%;
+    z-index: 5;
+    background-color: #0270D7;
+    padding: 1.7%;
+    border-radius: 5px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    display: table;
+    box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.3);
+    -webkit-box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.3);
+    -moz-box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.3);
+    opacity: .61;
+}
+
+.BackBtn:active {
+    opacity: 1;
+}
+
+.BackBtn > img {
+    display: table-cell;
+    vertical-align: middle;
+    width: 100%;
+    height: auto;
+}

@@ -1,0 +1,22 @@
+* {
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    /* make transparent link selection, adjust last value opacity 0 to 1.0 */
+}
+
+body {
+    background: url(../images/bkg.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center fixed;
+    /*font-family: 'HelveticaNeue-Light', 'HelveticaNeue', Helvetica, Arial, sans-serif;
+    font-size: 12px;*/
+    height: 100%;
+    margin: 0px;
+    padding: 0px;
+    /*text-transform: uppercase;*/
+    width: 100%;
+    font-style: normal;
+    font-family: "Verdana", Sans-serif;
+}
+
+

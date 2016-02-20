@@ -1,0 +1,104 @@
+<div class="expenseDiv">
+    <header>
+        <h2>{{expenseHeaderName}}</h2></header>
+    <img class="doneBttn" ng-src="images/donebtn.jpg" alt="DoneBtn" ng-click="validateAndInsertExpense(date, numberdata.value, newcurrdata.Code, expense, newcorpdata.name, newjobdata.name, newentitydata.name,newdivdata.name, newcostdata.name, newprodata.name)"/>
+    <img class="dltBttn" src="images/cancel.jpg" alt="DltBtn" ng-show="isShowDltButton" ng-click="dltExpense()">
+    <div class="demoTab">
+        <div class="descTab" id="descTab" ng-click="onDescriptionTabClick()">
+            <p> Description</p>
+        </div>
+        <div class="AccountTab" id="AccountTab" ng-click="onAccountingTabClick()">
+            <p>Accounting</p>
+        </div>
+        <div class="desc" ng-show="DescShow">
+            <div class="myImg" ng-click="showExpenseCodePickerPrompt()">
+                <img class="imgSrc" id="imgSrc" ng-src="" />
+            </div>
+            <div class="iconName">
+                <p>{{name}}</p>
+            </div>
+            <div id="cameraImg" ng-click="saveExpenseCurrentState(date, numberdata.value, newcurrdata.Code, expense, newcorpdata.name, newjobdata.name, newentitydata.name,newdivdata.name, newcostdata.name, newprodata.name)">
+                <img class="cameraImg" ng-src="images/cameraBtn.png" />
+            </div>
+            <div class="imgCount">
+                <p id="imgCount">
+                    <p>
+            </div>
+            <div class="cameraText">
+                <p>Images</p>
+            </div>
+            <input ng-model="date" id="dateField" readonly ng-click="showDatePicker()">
+            <input type="number" name="input" ng-model="numberdata.value" value="{{value}}" required placeholder="0.0" class="amountField" ng-focus="setScroll(true)">
+            <dropdown2 class="curencyInput" placeholder="10" list="CurrencyCodes" selected="newcurrdata" property="Code" ng-hide="hideCurrencyList"></dropdown2>
+            <div id="currencyOptional" ng-show="currencyOption">
+                <p id="changeText"></p>
+            </div>
+            <textarea rows="5" cols="22" class="textBox" ng-model="expense" placeholder="Expense Description" style="resize:none" ng-focus="setScroll(true)"></textarea>
+        </div>
+        <div class="BackBtn" ng-show="showBackBtn" ng-click="onClickBackButton()" on-long-press="onClickBackButton()">
+            <img src="images/back.png">
+        </div>
+        <div class="account" ng-show="AccountShow">
+            <label class="corpName" ng-hide="corp">Corporate Card</label>
+            <dropdown id="infoCorpInput" placeholder="Select Corporate Card.." list="CorpCards" selected="newcorpdata" property="name" ng-hide="corp"></dropdown>
+            <label class="jobName" ng-hide="job">Job </label>
+            <dropdown id="infoJobInput" placeholder="Select Job Number.." list="JobNumbers" selected="newjobdata" property="name" ng-hide="job"></dropdown>
+            <label class="entityName" ng-hide="entity">Entity</label>
+            <dropdown id="infoEntityInput" placeholder="Select Entity.." list="Entities" selected="newentitydata" property="name" ng-hide="entity"></dropdown>
+            <label class="divName" ng-hide="div">Division</label>
+            <dropdown id="infoDivisionInput" placeholder="Select Division.." list="Divisions" selected="newdivdata" property="name" ng-hide="div"></dropdown>
+            <label class="costName" ng-hide="cost">Cost Center</label>
+            <dropdown id="infoCostInput" placeholder="Select Cost Center.." list="CostCenters" selected="newcostdata" property="name" ng-hide="cost"></dropdown>
+            <label id="newPro" ng-hide="pro">Project</label>
+            <dropdown id="infoProInput" placeholder="Select Project" list="Project" selected="newprodata" property="name" ng-hide="pro"></dropdown>
+        </div>
+        <div class="BackBtn" ng-show="showBackBtn" ng-click="onClickBackButton()" on-long-press="onClickBackButton()">
+            <img src="images/back.png">
+        </div>
+    </div>
+    <div id="Overley" ng-show="showExpenseCodePicker">
+        <div id="topExpenseBack" ng-click="onClickBackButton(expense)"></div>
+        <div id="leftExpenseBack" ng-click="onClickBackButton(expense)"></div>
+        <div id="rightExpenseBack" ng-click="onClickBackButton(expense)"></div>
+        <div id="expenseCode">
+            <label id="codeText">Select Expense Code</label>
+            <div id="Subdiv" ng-repeat="icon in ExpenseCodes">
+                <div id="subdiv1">
+                    <div id="{{icon.Name}}">
+                        <img id="divImg" ng-src="data:image/png;base64,{{icon.Icon}}" ng-click="ExpenseCodePicker(icon)" />
+                    </div>
+                    <div id="{{icon.Name}}text">
+                        <p>{{icon.Name}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="expenseBack" ng-click="onClickBackButton(expense)"></div>
+    </div>
+    <div class="Overley" ng-show="calender">
+        <div id="topDatePickerHide" ng-click="hideDatePicker()"></div>
+        <div id="leftDatePickerHide" ng-click="hideDatePicker()"></div>
+        <div id="rightDatePickerHide" ng-click="hideDatePicker()"></div>
+        <div id="bottomDatePickerHide" ng-click="hideDatePicker()"></div>
+        <div id="datePicker" ng-click="isNewDateSelect(date)">
+            <div id="hideBox">Expenditure Date</div>
+            <datepicker date-format="EEE MMM d y">
+                <input ng-model="date" id="date1" focus-if="focusInput" />
+            </datepicker>
+        </div>
+    </div>
+</div>
+<div class="maindiv" ng-show="viewer">
+    <header>
+        <h2>Receipt Image</h2></header>
+    <img class="cameraBttn" src="images/camerabtn1.png" alt="CameraBtn">
+    <img id="btnDlt" ng-repeat="img in images" src="images/cancel.jpg" />
+    <div id="receiptView">
+        <div class="slider" id="imageSliderContainerID">
+            <div class="slide"></div>
+        </div>
+        <div class="BackBtn" ng-show="showBackBtn" ng-click="onClickBackButton()" on-long-press="onClickBackButton()">
+            <img src="images/back.png">
+        </div>
+    </div>
+</div>

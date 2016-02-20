@@ -1,0 +1,15 @@
+<div id="setting" class="FadeIn">
+    <header>
+        <h2>Settings</h2></header>
+        <div id="Back" ng-click="back()" on-long-press="back()" ng-show="showBackBtn">
+            <div><img src="images/back.png">
+            </div>
+        </div>
+    <div id="SettingBody">
+        <p id="appVer"><b>Application Version</b></p>
+        <p id="Version">{{appVersion}}</p>
+        <p id="serverAdd"><b>Server Address</b></p>
+        <p id="Address">{{serverAddress}}</p>
+        <input type="button" id="serverUpdateBtn" ng-click="updateServer()" on-long-press="updateServer()" value="Change Server Registration"></input>
+    </div>
+</div>
