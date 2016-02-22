@@ -16,7 +16,7 @@ angular.module('slingshot', ['ngAnimate', 'ngCookies',
 
         .state('slingmainpage', {
             url: '/slingmainpage',
-            templateUrl: 'partials/slingmainpage.html',
+            templateUrl: 'partials/mainpage.html',
             controller: 'SlingPageCtrl'
         })
 
@@ -26,15 +26,9 @@ angular.module('slingshot', ['ngAnimate', 'ngCookies',
             controller: 'TripInfoCtrl'
         })
 
-        .state('fileexpense', {
-            url: '/fileexpense',
-            templateUrl: 'partials/fileexpense.html',
-            controller: 'FileExpenseCtrl'
-        })
-
         .state('newexpense', {
             url: '/newexpense',
-            templateUrl: 'partials/newexpense.html',
+            templateUrl: 'partials/expense.html',
             controller: 'NewExpenseCtrl'
         })
 
@@ -46,7 +40,7 @@ angular.module('slingshot', ['ngAnimate', 'ngCookies',
 
         .state('newexpenseimageviewer', {
             url: '/newexpenseimageviewer',
-            templateUrl: 'partials/newexpenseimageviewer.html',
+            templateUrl: 'partials/expenseImageViewer.html',
             controller: 'NewExpenseImageViewerCtrl'
         })
 
@@ -58,7 +52,7 @@ angular.module('slingshot', ['ngAnimate', 'ngCookies',
 
         .state('editexpense', {
             url: '/editexpense?exId',
-            templateUrl: 'partials/newexpense.html',
+            templateUrl: 'partials/expense.html',
             controller: 'EditExpenseCtrl'
         })
 
@@ -70,7 +64,7 @@ angular.module('slingshot', ['ngAnimate', 'ngCookies',
 
         .state('editexpenseimageviewer', {
             url: '/editexpenseimageviewer',
-            templateUrl: 'partials/editexpenseimageviewer.html',
+            templateUrl: 'partials/expenseImageViewer.html',
             controller: 'EditExpenseImageViewerCtrl'
         })
           .state('uploadResultPage', {

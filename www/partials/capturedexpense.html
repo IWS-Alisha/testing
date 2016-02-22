@@ -1,7 +1,13 @@
 <div class="parentdiv">
-    <header>
-        <h2> Captured Expenses </h2>
-    </header>
+    <div id="CapturedTitle">
+        <div id="Back" ng-click="back()" on-long-press="back()" ng-show="showBackBtn">
+            <div><img src="images/back.png">
+            </div>
+        </div>
+        <div id="Title">
+            <h2>Captured Expenses</h2>
+        </div>
+    </div>
     <img class="doneBttn" src="images/addBtn.png" alt="AddBtn" ng-click="newExpense()">
     <div id="processed" ng-show="ExpensesExist">
         <div id="expenseDetail">
@@ -42,7 +48,3 @@
 <!-- <div class="BackBtn" ng-show="showBackBtn" ng-click="back()" on-long-press="back()">
     <img src="images/back.png">
 </div> -->
-<div id="Back" ng-click="back()" on-long-press="back()" ng-show="showBackBtn">
-    <div><img src="images/back.png">
-    </div>
-</div>

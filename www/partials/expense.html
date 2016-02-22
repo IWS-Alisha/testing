@@ -91,8 +91,8 @@
 <div class="maindiv" ng-show="viewer">
     <header>
         <h2>Receipt Image</h2></header>
-    <img class="cameraBttn" src="images/camerabtn1.png" alt="CameraBtn">
-    <img id="btnDlt" ng-repeat="img in images" src="images/cancel.jpg" />
+    <img class="doneBttn" src="images/camerabtn1.png" alt="CameraBtn" ng-click="takePicture()">
+    <img id="dltBttn" src="images/cancel.jpg" ng-click="dltFilePopUp()">
     <div id="receiptView">
         <div class="slider" id="imageSliderContainerID">
             <div class="slide"></div>

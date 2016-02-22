@@ -268,3 +268,25 @@
    
 }
 
+#textApp {
+    color: black;
+    position: absolute;
+    top: 16%;
+    left: 0%;
+    width:100%;
+    text-align: center;
+    font-size: 8vw;
+    font-weight: normal;
+}
+
+#capture {
+    color: black;
+    position: absolute;
+    top: 23%;
+    left: 0%;
+    width:100%;
+    font-size: 8vw;
+    text-align: center;
+    font-weight: normal;
+}
+

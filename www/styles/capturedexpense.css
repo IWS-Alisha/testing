@@ -4,7 +4,79 @@
     left: 0%;
     width: 100%;
     height: 100%;
+    vertical-align: middle;
 }
+
+#CapturedTitle {
+    position: absolute;
+    top: 0%;
+    left: 0%;
+    width: 100%;
+    height: 12%;
+    background: #0251A0;
+    text-align: center;
+}
+
+#CapturedTitle > #Back {
+    position: absolute;
+    top: 0%;
+    left: 0%;
+    width: 15%;
+    height: 100%;
+    display: table;
+}
+
+#CapturedTitle > #Back:active {
+    opacity: .70;
+}
+
+#CapturedTitle > #Back > div {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+#CapturedTitle > #Back > div > img {
+    width: 50%;
+    height: auto;
+}
+
+#CapturedTitle > #Title {
+    position: absolute;
+    top: 0%;
+    margin-top: 0%;
+    left: 10%;
+    width: 85%;
+    height: 100%;
+    text-align: center;
+    display: table;
+}
+
+#CapturedTitle > #Title > h2 {
+    display: table-cell;
+    vertical-align: middle;
+    color: white;
+    font-size: 6.5vw;
+}
+
+#CapturedTitle > .doneBttn {
+    position: absolute;
+    top: 0%;
+    left: 0%;
+    width: 15%;
+    height: 100%;
+    display: table;
+}
+
+#CapturedTitle > .doneBttn > div {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+/*#CapturedTitle > #Back > div > img {
+    width: 50%;
+    height: auto;
+}
+*/
 
 #unProcessed {
     position: absolute;

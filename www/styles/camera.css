@@ -6,7 +6,7 @@
     height: 90%;
     background-color: black;
     overflow: hidden;
-}
+} 
 
 .slider > img {
     position: absolute;
@@ -71,8 +71,8 @@
 #btnDlt {
     position: absolute;
     left: 5%;
-    top: 3.2%;
-    width: 7%;
+    top: 3%;
+    width: 8%;
     height: auto;
 }
 

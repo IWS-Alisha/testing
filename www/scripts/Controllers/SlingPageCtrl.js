@@ -409,6 +409,8 @@ angular.module('slingshot')
                                 $scope.tripInfo = '?';
                                 $scope.actionBtnExp = 0;
                                 $scope.isSubmitDisabled = true;
+                                $scope.ShowActionCounts = false;
+                                $scope.$apply();
                             }
                         });
                     });

@@ -400,7 +400,7 @@ angular.module('slingshot')
                 files: fileCount
             };
             if (fileCount > 0) {
-                $rootScope.images = images;
+                // $rootScope.images = images;
                 $state.go('newexpenseimageviewer');
             } else {
                 $scope.viewer = true;

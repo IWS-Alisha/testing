@@ -33,7 +33,7 @@ angular.module('slingshot')
             $scope.isShowDltButton = true;
             $scope.calender = false;
             $scope.focusInput = false;
-            $scope.showBackBtn = false;
+        
             $scope.viewer = false;
             $scope.DescShow = true;
             $scope.hideCurrencyList = false;

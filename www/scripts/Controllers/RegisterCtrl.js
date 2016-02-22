@@ -7,8 +7,10 @@ angular.module('slingshot')
 
         var loginButton, regForm, network, regOuter, serverid;
 
-        $scope.BackButton = false;
         $scope.splash = false;
+
+        // cordova.plugins.Keyboard.close();
+        // cordova.plugins.Keyboard.disableScroll(false);
 
         $scope.$on("$destroy", function() {
             document.removeEventListener("backbutton", backButtonHandler, false);
@@ -81,6 +83,9 @@ angular.module('slingshot')
         };
 
         $scope.setScroll = function(isSet, offSet) {
+            // if (device.platform == 'iOS') {
+            //     offSet = offSet +10;
+            // }
             regForm.style.transition = "all .5s";
             regForm.style.top = offSet + "%";
             document.getElementById("registerOuter").style.height = 30 + "%";
@@ -145,7 +150,7 @@ angular.module('slingshot')
                     if (btnIndex == 1) {
                         $scope.userId = '';
                         $scope.password = '';
-                        $scope.serverId = serverid; 
+                        $scope.serverId = serverid;
                         resetButton();
                     } else {
                         if (device.platform === 'iOS') {
