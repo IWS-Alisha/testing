@@ -2,17 +2,7 @@
 
 'use strict';
 angular.module('slingshot')
-    /**
-     * @ngdoc directive
-     * @name pinchZoom
-     * @restrict A
-     * @scope false
-     *
-     * @description
-     * 要素のピンチアウト・インでの拡大・縮小、拡大時のスワイプ動作を提供
-     *
-     **/
-    .directive('ngPinchZoom', function(localStorageService, $rootScope) {
+    .directive('pinchZoom', function($rootScope) {
         var _directive = {
             restrict: 'A',
             scope: false,
@@ -52,6 +42,7 @@ angular.module('slingshot')
             var startY = 0;
             var moveX = 0;
             var moveY = 0;
+            var count = 0;
 
             element.css({
                 '-webkit-transform-origin': '0 0',
@@ -59,7 +50,7 @@ angular.module('slingshot')
             });
 
             element.on('touchstart', function(evt) {
-
+                startX = evt.touches[0].pageX;
                 startY = evt.touches[0].pageY;
                 initialPositionX = positionX;
                 initialPositionY = positionY;
@@ -114,6 +105,7 @@ angular.module('slingshot')
                         positionX = originX * (1 - relativeScale) + initialPositionX + moveX;
                         positionY = originY * (1 - relativeScale) + initialPositionY + moveY;
 
+
                         if (scale > 1) {
 
                             if (positionX > 0) {
@@ -126,8 +118,9 @@ angular.module('slingshot')
                             } else if (positionY < elHeight * (1 - scale)) {
                                 positionY = elHeight * (1 - scale);
                             }
-                            transformElement();
+                             transformElement();
                         }
+                       
 
                     } else {
 
@@ -138,7 +131,6 @@ angular.module('slingshot')
                         }
 
                     }
-
                 }
             });
 
@@ -161,6 +153,7 @@ angular.module('slingshot')
 
                         }
                         transformElement();
+
                     }
 
                     if (scale > 1) {
@@ -178,11 +171,13 @@ angular.module('slingshot')
                         transformElement();
                     }
                 }
+
             });
 
             function getDistance(evt) {
-                var d = Math.sqrt(Math.pow(evt.touches[0].pageX - evt.touches[1].pageX, 2) +
-                    Math.pow(evt.touches[0].pageY - evt.touches[1].pageY, 2));
+                // console.log("evt"+evt);
+                var d = Math.sqrt(Math.pow(evt.targetTouches[0].pageX - evt.targetTouches[1].pageX, 2) +
+                    Math.pow(evt.targetTouches[0].pageY - evt.targetTouches[1].pageY, 2));
                 return parseInt(d, 10);
             }
 

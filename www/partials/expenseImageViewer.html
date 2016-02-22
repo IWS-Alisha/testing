@@ -5,7 +5,7 @@
     <img class="doneBttn" src="images/camerabtn1.png" alt="CameraBtn" ng-click="takePicture()">
     <img id="btnDlt" ng-repeat="img in images" src="images/cancel.jpg" ng-click="dltFilePopUp()">
     <div class="slider {{dir}}" id="imageSliderContainerID"><!-- data:image/jpeg;base64, -->
-        <img ng-repeat="image in images" ng-hide="!isCurrentSlideIndex($index)" class="slide" id="slideID" ng-src="{{image.Data}}" ng-pinch-zoom style="transform-origin: 0px 0px 0px;" hm-pinch="pinchStart" hm-pinch="pinchEnd" style="z-index: {{images.length - $index}}">
+        <img ng-repeat="image in images" ng-hide="!isCurrentSlideIndex($index)" class="slide" id="slideID" ng-src="{{image.Data}}" pinch-zoom style="transform-origin: 0px 0px 0px;" hm-pinch="pinchStart" hm-pinch="pinchEnd" style="z-index: {{images.length - $index}}">
     </div>
     <div class="BackBtn" ng-show="showBackBtn" ng-click="back()" on-long-press="back()">
         <img src="images/back.png">

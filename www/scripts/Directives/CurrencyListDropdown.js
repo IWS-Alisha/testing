@@ -11,7 +11,7 @@ angular.module('slingshot')
     .directive("dropdown2", function($rootScope) {
         return {
             restrict: "E",
-            templateUrl: "partials/Dropdown2.html",
+            templateUrl: "partials/currencyDropdown.html",
             scope: {
                 placeholder: "@",
                 list: "=",
