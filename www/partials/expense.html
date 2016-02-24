@@ -1,7 +1,7 @@
 <div class="expenseDiv">
     <header>
         <h2>{{expenseHeaderName}}</h2></header>
-    <img class="doneBttn" ng-src="images/donebtn.jpg" alt="DoneBtn" ng-click="validateAndInsertExpense(date, numberdata.value, newcurrdata.Code, expense, newcorpdata.name, newjobdata.name, newentitydata.name,newdivdata.name, newcostdata.name, newprodata.name)"/>
+    <img class="doneBttn" ng-src="images/donebtn.jpg" alt="DoneBtn" ng-click="validateAndInsertExpense(date, numberdata.value, newcurrdata.Code, expense, newcorpdata.name, newjobdata.name, newentitydata.name,newdivdata.name, newcostdata.name, newprodata.name)" />
     <img class="dltBttn" src="images/cancel.jpg" alt="DltBtn" ng-show="isShowDltButton" ng-click="dltExpense()">
     <div class="demoTab">
         <div class="descTab" id="descTab" ng-click="onDescriptionTabClick()">
@@ -51,6 +51,12 @@
             <dropdown id="infoCostInput" placeholder="Select Cost Center.." list="CostCenters" selected="newcostdata" property="name" ng-hide="cost"></dropdown>
             <label id="newPro" ng-hide="pro">Project</label>
             <dropdown id="infoProInput" placeholder="Select Project" list="Project" selected="newprodata" property="name" ng-hide="pro"></dropdown>
+        </div>
+        <div class="hideDropDownlistLeft" ng-click="hideList()">
+        </div>
+        <div class="hideDropDownlistRight" ng-click="hideList()">
+        </div>
+        <div class="hideDropDownlistBottom" ng-click="hideList()">
         </div>
         <div class="BackBtn" ng-show="showBackBtn" ng-click="onClickBackButton()" on-long-press="onClickBackButton()">
             <img src="images/back.png">

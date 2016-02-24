@@ -184,7 +184,7 @@ angular.module('slingshot')
 
         db.transaction(function(tx) {
 
-            tx.executeSql('SELECT * FROM expenseUploadResults WHERE Id = ?', [ID], function(tx, res) {
+            tx.executeSql('SELECT * FROM expenseUploadResults WHERE Id = ?', [exId], function(tx, res) {
                     callback(res.rows.item(0));
             });
 

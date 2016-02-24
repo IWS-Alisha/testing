@@ -77,7 +77,13 @@
     height: auto;
 }
 */
-
+#processed{
+    position: absolute;
+    top: 12%;
+    left: 0;
+    width: 100%;
+    height: 88%; 
+}
 #unProcessed {
     position: absolute;
     top: 12%;

@@ -22,10 +22,6 @@
             <icon src="www/images/icon/android/mdpi.png" density="mdpi" />
             <icon src="www/images/icon/android/hdpi.png" density="hdpi" />
             <icon src="www/images/icon/android/xhdpi.png" density="xhdpi" />
-            <splash src="www/images/screen/android/splash-port-hdpi.png" density="port-hdpi" />
-            <splash src="www/images/screen/android/splash-port-ldpi.png" density="port-ldpi" />
-            <splash src="www/images/screen/android/splash-port-mdpi.png" density="port-mdpi" />
-            <splash src="www/images/screen/android/splash-port-xhdpi.png" density="port-xhdpi" />
         </platform>
         <platform name="ios">
             <allow-intent href="itms:*" />

@@ -291,6 +291,11 @@ angular.module('slingshot')
             accountingTab.style.backgroundColor = "white";
         };
 
+        $scope.hideList = function() {
+            $rootScope.$broadcast("closeList");
+            $rootScope.$broadcast("hideList");
+        };
+        
         $scope.validateAndInsertExpense = function(date, amount, currency, description, corpdata, jobnumber, newentity, divdata, newcostdata, prodata) {
             cordova.plugins.Keyboard.close();
             checkIsExpenseValid(date, amount, currency, description, corpdata, jobnumber, newentity, divdata, newcostdata, prodata);

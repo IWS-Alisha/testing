@@ -1,12 +1,21 @@
+.mainDiv {
+    position: fixed;
+    top: 0%;
+    left: 0%;
+    width: 100%;
+    height: 100%;
+    background: black;
+}
+
 .slider {
     position: fixed;
     top: 10%;
     left: 0%;
     width: 100%;
-    height: 91%;
+    height: 90%;
     background-color: black;
     overflow: hidden;
-} 
+}
 
 .slider > img {
     position: absolute;
@@ -15,10 +24,13 @@
     width: 100%;
     /*overflow: hidden;*/
 }
-.slider img :touch, .slider img :hover, .slider img :focus{
+
+/*.slider img:touch,
+.slider img:hover,
+.slider img:focus {
     object-fit: contain;
 }
-
+*/
 .slider.LTR .slide.ng-hide-add,
 .slider.LTR .slide.ng-hide-remove,
 .slider.RTL .slide.ng-hide-add,
@@ -129,9 +141,8 @@
 }
 
 #prev:active {
-     z-index: 5;
-    opacity: .61
-    -webkit-box-shadow: none !important;
+    z-index: 5;
+    opacity: .61 -webkit-box-shadow: none !important;
     -moz-box-shadow: none !important;
     box-shadow: none !important;
     background: -webkit-linear-gradient(#727272, #DCDCDC);
@@ -147,8 +158,7 @@
 
 #next:active {
     z-index: 5;
-    opacity: .61
-    -webkit-box-shadow: none !important;
+    opacity: .61 -webkit-box-shadow: none !important;
     -moz-box-shadow: none !important;
     box-shadow: none !important;
     background: -webkit-linear-gradient(#727272, #DCDCDC);

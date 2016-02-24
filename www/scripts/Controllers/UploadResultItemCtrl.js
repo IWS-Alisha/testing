@@ -19,7 +19,7 @@ angular.module('slingshot')
             document.addEventListener("deviceready", onDeviceReady, false);
             document.addEventListener('backbutton', backButtonHandler, false);
 
-            getUploadResultsExpense();
+            getUploadResultExpense();
 
         });
 
@@ -48,7 +48,7 @@ angular.module('slingshot')
             return false;
         };
 
-        function getUploadResultsExpense() {
+        function getUploadResultExpense() {
 
             sqlService.getUploadResultsExpense(localStorageService.get('DocId'), function(result) {
                 $scope.uploadResult = result;

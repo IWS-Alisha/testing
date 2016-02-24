@@ -22,6 +22,7 @@ angular.module('slingshot')
         });
 
         function onDeviceReady() {
+             // alert('hello world');
             showAppNameAndVersionNumber();
 
             if (isNetworkAvailable()) {
@@ -45,6 +46,7 @@ angular.module('slingshot')
         };
 
         function showAppNameAndVersionNumber() {
+            // alert('hello world');
             //get app name from config file
             cordova.getAppVersion.getAppName(function(name) {
                 $scope.appName = name;

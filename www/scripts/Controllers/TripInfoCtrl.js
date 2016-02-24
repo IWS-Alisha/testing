@@ -142,6 +142,7 @@
 
           $scope.hideList = function() {
               $rootScope.$broadcast("closeList");
+              $rootScope.$broadcast("hideList");
           };
 
 

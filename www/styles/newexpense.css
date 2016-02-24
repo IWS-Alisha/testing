@@ -31,36 +31,36 @@ header {
     height: 100%;
     z-index: 10;
     background-color: rgba(0, 0, 0, 0.5);
-    
 }
-.Overley > #datePicker{
-    position:absolute;
-    top:20%;
-    left:10%;
-    width:80%;
+
+.Overley > #datePicker {
+    position: absolute;
+    top: 20%;
+    left: 10%;
+    width: 80%;
     height: 60%;
-   
 }
-.Overley > #datePicker > #hideBox{
-    position:absolute;
-    top:-3%;
-    left:0%; 
-    width:97.8%;
+
+.Overley > #datePicker > #hideBox {
+    position: absolute;
+    top: -3%;
+    left: 0%;
+    width: 97.8%;
     height: 10%;
     font-size: 5vw;
     color: white;
     z-index: 10;
-    padding-top:1%;
+    padding-top: 1%;
     padding-left: 3%;
     /*background: red;*/
     background: #05A2FB;
 }
 
-.Overley > #datePicker > #date1{
+.Overley > #datePicker > #date1 {
     position: absolute;
     top: 0%;
     left: 5%;
-    visibility: hidden;  
+    visibility: hidden;
 }
 
 #expenseCode {
@@ -71,64 +71,70 @@ header {
     height: 60%;
     width: 88%;
 }
-#expenseBack{
+
+#expenseBack {
     position: absolute;
-    top:70%;
-    left:0%;
-    width:100%;
-    height:28%;
-}
-#topExpenseBack{
-    position: absolute;
-    top:0%;
-    left:0%;
-    width:100%;
-    height:15%;
-}
-#leftExpenseBack{
-    position: absolute;
-    top:0%;
-    left:0%;
-    width:5%;
-    height:80%;
-}
-#rightExpenseBack{
-    position: absolute;
-    top:0%;
-    left:95%;
-    width:5%;
-    height:80%;
+    top: 70%;
+    left: 0%;
+    width: 100%;
+    height: 28%;
 }
 
-.Overley > #topDatePickerHide{
+#topExpenseBack {
     position: absolute;
-    top:0%;
-    left:0%;
-    width:100%;
-    height:10%;
-}
-.Overley > #leftDatePickerHide{
-    position: absolute;
-    top:0%;
-    left:0%;
-    width:8%;
-    height:80%;
-}
-.Overley > #rightDatePickerHide{
-    position: absolute;
-    top:0%;
-    left:92%;
-    width:8%;
-    height:80%;
-}
-.Overley > #bottomDatePickerHide{
-    position: absolute;
-    top:75%;
-    left:0%;
-    width:100%;
-    height:25%;
+    top: 0%;
+    left: 0%;
+    width: 100%;
+    height: 15%;
 }
 
+#leftExpenseBack {
+    position: absolute;
+    top: 0%;
+    left: 0%;
+    width: 5%;
+    height: 80%;
+}
+
+#rightExpenseBack {
+    position: absolute;
+    top: 0%;
+    left: 95%;
+    width: 5%;
+    height: 80%;
+}
+
+.Overley > #topDatePickerHide {
+    position: absolute;
+    top: 0%;
+    left: 0%;
+    width: 100%;
+    height: 10%;
+}
+
+.Overley > #leftDatePickerHide {
+    position: absolute;
+    top: 0%;
+    left: 0%;
+    width: 8%;
+    height: 80%;
+}
+
+.Overley > #rightDatePickerHide {
+    position: absolute;
+    top: 0%;
+    left: 92%;
+    width: 8%;
+    height: 80%;
+}
+
+.Overley > #bottomDatePickerHide {
+    position: absolute;
+    top: 75%;
+    left: 0%;
+    width: 100%;
+    height: 25%;
+}
 
 #codeText {
     position: absolute;
@@ -146,7 +152,6 @@ header {
     height: 6%;
     font-size: 3.5vw;
 }
-
 
 #Airfare {
     position: absolute;
@@ -364,42 +369,46 @@ header {
     font-size: 3vw;
 }
 
-.expenseDiv{
+.expenseDiv {
     position: fixed;
-    top:0%;
-    left:0%;
-    width:100%;
-    height:100%;
+    top: 0%;
+    left: 0%;
+    width: 100%;
+    height: 100%;
 }
-.descTab{
+
+.descTab {
     position: absolute;
-    top:12%;
-    left:0%;
-    width:50%;
+    top: 12%;
+    left: 0%;
+    width: 50%;
     height: 8%;
-    color:black;
+    color: black;
     /*background: #F0F1F3;*/
     font-size: 3.5vw;
     padding-top: 2%;
 }
-.descTab > p{
+
+.descTab > p {
     text-align: center;
     vertical-align: middle;
 }
-.desc{
+
+.desc {
     position: absolute;
-    top:20%;
-    left:10%;
-    width:80%;
-    height:80%;
+    top: 20%;
+    left: 10%;
+    width: 80%;
+    height: 80%;
     /*background: red;*/
 }
-.desc > .myImg{
+
+.desc > .myImg {
     position: absolute;
-    left:0%;
-    top:10%;
-    width:13%;
-    height:7%;
+    left: 0%;
+    top: 10%;
+    width: 13%;
+    height: 7%;
     border-radius: 6px;
     border: 3px solid #0375DF;
     background-color: #067FF2;
@@ -407,25 +416,28 @@ header {
     -moz-box-shadow: 0 6px 6px 0px grey;
     box-shadow: 0 6px 6px 0px grey;
 }
-.desc > .myImg > img{
+
+.desc > .myImg > img {
     position: absolute;
     height: 100%;
     width: 100%;
-
 }
-.desc > .iconName{
+
+.desc > .iconName {
     position: absolute;
-    top:19%;
-    left:0%;
-    width:15%;
+    top: 19%;
+    left: 0%;
+    width: 15%;
     /*font-size: 3.4vw;*/
 }
-.desc > .iconName > p{
+
+.desc > .iconName > p {
     font-size: 3.4vw;
     text-align: center;
     vertical-align: middle;
 }
-.desc > #cameraImg{
+
+.desc > #cameraImg {
     position: absolute;
     top: 28.5%;
     left: 0%;
@@ -438,13 +450,15 @@ header {
     -moz-box-shadow: 0 6px 6px 0px grey;
     box-shadow: 0 6px 6px 0px grey;
 }
-.desc > #cameraImg > img{
-   /* position: absolute;*/
+
+.desc > #cameraImg > img {
+    /* position: absolute;*/
     padding-top: 10%;
     padding-left: 10%;
     width: 80%;
     height: 80%;
 }
+
 .desc > .imgCount {
     display: table;
     position: absolute;
@@ -456,10 +470,10 @@ header {
     font-size: 2vw;
     background: green;
     border-radius: 6px;
-    color:white;
-
+    color: white;
 }
-.desc >  #dateField{
+
+.desc > #dateField {
     position: absolute;
     top: 9%;
     left: 24%;
@@ -468,17 +482,17 @@ header {
     border-radius: 6px;
     font-size: 3.5vw;
     text-align: center;
- 
 }
-.desc > .imgCount > p{
-    width:100%;
+
+.desc > .imgCount > p {
+    width: 100%;
     text-align: center;
     vertical-align: middle;
     font-size: 3vw;
     display: table-cell;
 }
-.desc > .cameraText{
 
+.desc > .cameraText {
     position: absolute;
     top: 37%;
     left: 0%;
@@ -486,24 +500,25 @@ header {
     height: 4%;
     /*border-radius: 6px;*/
     font-size: 3.5vw;
-   
-}
-.desc > .cameraText > p{
-    width:100%;
-     text-align: center;
 }
 
-.desc > .amountField{
+.desc > .cameraText > p {
+    width: 100%;
+    text-align: center;
+}
+
+.desc > .amountField {
     position: absolute;
-    top:19%;
-    left:24%;
+    top: 19%;
+    left: 24%;
     height: 6%;
-    width:55%;
+    width: 55%;
     border-radius: 6px;
     font-size: 5vw;
     border: solid 1px #CCCCCC;
 }
-.desc > .textBox{
+
+.desc > .textBox {
     position: absolute;
     top: 30%;
     left: 24%;
@@ -514,32 +529,35 @@ header {
     border: solid 1px #CCCCCC;
     text-transform: capitalize;
 }
-.desc > .curencyInput{
+
+.desc > .curencyInput {
     position: absolute;
     top: 19%;
     left: 86%;
     width: 14%;
 }
-.desc > #currencyOptional{
+
+.desc > #currencyOptional {
     position: absolute;
     top: 16.5%;
     left: 86%;
     width: 15%;
-    height:4%;
+    height: 4%;
     color: black;
     font-size: 4.5vw;
 }
-.desc > #currencyOptional > p{
-    width:100%;
+
+.desc > #currencyOptional > p {
+    width: 100%;
     text-align: center;
 }
 
-#text{
+#text {
     position: absolute;
-    top:10%;
+    top: 10%;
     left: 0%;
-    width:90%;
-    height:60%;
+    width: 90%;
+    height: 60%;
     background-color: #F0F1F3;
     font-size: 3vw;
     font-style: none;
@@ -549,110 +567,147 @@ header {
     color: #212121;
     padding: 5%;
 }
-.AccountTab{
+
+.AccountTab {
     position: absolute;
-    top:12%;
-    left:50%;
-    width:50%;
+    top: 12%;
+    left: 50%;
+    width: 50%;
     height: 8%;
-    color:black;
+    color: black;
     background: #F0F1F3;
     padding-top: 2%;
     font-size: 3vw;
 }
-.AccountTab > p{
+
+.AccountTab > p {
     text-align: center;
     vertical-align: middle;
 }
-.account{
+
+.account {
     position: absolute;
-    top:22%;
-    left:15%;
-    width:70%;
-    height:78%;
+    top: 22%;
+    left: 15%;
+    width: 70%;
+    height: 78%;
     /*background: green;*/
     z-index: 10;
 }
- .corpName{
-    position: absolute;
-    top:3%;
-    font-size: 4vw;
 
-}
- #infoCorpInput{
-    position:absolute;
-    top: 9.2%;
-    width:100%;
-    left:0%;
-    z-index: 11;
-}
-.jobName{
+.hideDropDownlistLeft {
     position: absolute;
-    top:44%;
-    font-size: 4vw;
-}
- #infoJobInput{
-    position: absolute;
-    top: 50%;
-    width:100%;
-    left:0%;
-    z-index: 8;
-
-}
-.account > .entityName{
-    position: absolute;
-    top:16%;
-    font-size: 4vw;
-}
-.account > #infoEntityInput{
-    position:absolute;
-    top: 22%;
-    width:100%;
-    left:0%;
+    top: 18%;
+    left: 0%;
+    width: 15%;
+    height: 78%;
     z-index: 10;
 }
-.account > .divName{
+.hideDropDownlistRight {
     position: absolute;
-    top:29%;
+    top: 18%;
+    left: 85%;
+    width: 15%;
+    height: 78%;
+    z-index: 10;
+}
+.hideDropDownlistBottom {
+    position: absolute;
+    top: 68%;
+    left: 0%;
+    width: 100%;
+    height: 25%;
+    z-index: 10;
+}
+.corpName {
+    position: absolute;
+    top: 3%;
     font-size: 4vw;
 }
-.account > #infoDivisionInput{
-    position:absolute;
+
+#infoCorpInput {
+    position: absolute;
+    top: 9.2%;
+    width: 100%;
+    left: 0%;
+    z-index: 11;
+}
+
+.jobName {
+    position: absolute;
+    top: 44%;
+    font-size: 4vw;
+}
+
+#infoJobInput {
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    left: 0%;
+    z-index: 8;
+}
+
+.account > .entityName {
+    position: absolute;
+    top: 16%;
+    font-size: 4vw;
+}
+
+.account > #infoEntityInput {
+    position: absolute;
+    top: 22%;
+    width: 100%;
+    left: 0%;
+    z-index: 10;
+}
+
+.account > .divName {
+    position: absolute;
+    top: 29%;
+    font-size: 4vw;
+}
+
+.account > #infoDivisionInput {
+    position: absolute;
     top: 35%;
-    width:100%;
-    left:0%;
+    width: 100%;
+    left: 0%;
     z-index: 9;
 }
-.account > .costName{
+
+.account > .costName {
     position: absolute;
-    top:58%;
+    top: 58%;
     font-size: 4vw;
 }
-.account > #infoCostInput{
+
+.account > #infoCostInput {
     position: absolute;
-    top:64%;
-    left:0%;
+    top: 64%;
+    left: 0%;
     width: 100%;
     z-index: 7;
 }
-.account > #newPro{
+
+.account > #newPro {
     position: absolute;
-    top:42%;
+    top: 42%;
     font-size: 4vw;
 }
-.account > #infoProInput{
+
+.account > #infoProInput {
     position: absolute;
-    top:48%;
-    left:0%;
+    top: 48%;
+    left: 0%;
     width: 100%;
     z-index: 7;
 }
-#Back{
+
+#Back {
     position: absolute;
     left: 5%;
     top: 3%;
     width: 5%;
     height: auto;
     display: table;
-} 
-
+}

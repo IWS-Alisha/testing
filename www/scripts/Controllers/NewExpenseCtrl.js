@@ -258,8 +258,9 @@ angular.module('slingshot')
             accountingTab.style.backgroundColor = "white";
         };
 
-        $scope.hideDropDownList = function() {
+        $scope.hideList = function() {
             $rootScope.$broadcast("closeList");
+            $rootScope.$broadcast("hideList");
         };
 
 
