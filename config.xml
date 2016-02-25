@@ -63,20 +63,12 @@
             <icon src="www/images/icon/wp/ApplicationIcon.png" width="99" height="99" />
             <!-- tile image -->
             <icon src="www/images/icon/wp/Background.png" width="159" height="159" />
-            <splash src="www/images/screen/wp8/SplashScreenImage.jpg" width="768" height="1280" />
         </platform>
-        <platform name="blackberry10">
+     <!--    <platform name="blackberry10">
             <preference name="websecurity" value="disable" />
             <icon src="www/images/icon/bb10/icon-86.png" />
             <icon src="www/images/icon/bb10/icon-150.png" />
-            <rim:splash src="www/images/screen/wp8/splashscreen.png" />
-            <rim:splash src="www/images/screen/wp8/bbPass.png" />
-            <rim:splash src="www/images/screen/wp8/bbQ10.png" />
-            <rim:splash src="www/images/screen/wp8/bbZ30.png" />
-        </platform>
-        <!-- for the testing -->
-        <preference name="target-device" value="universal"/>
-        <!--  -->
+        </platform> -->
         <preference name="Orientation" value="portrait" />
         <preference name="Fullscreen" value="true" />
         <preference name="SplashScreenDelay" value="0" />
@@ -86,15 +78,7 @@
         <preference name="StatusBarOverlaysWebView" value="false" />
         <preference name="StatusBarBackgroundColor" value="#000000" />
         <preference name="KeyboardShrinksView" value="false" />
-        <feature name="Device">
-            <param name="android-package" value="org.apache.cordova.Device" />
-            <param name="ios-package" value="CDVDevice" />
-        </feature>
-        <feature name="NetworkStatus">
-            <param name="android-package" value="org.apache.cordova.NetworkManager" />
-            <param name="blackberry-package" value="org.apache.cordova.network.Network" />
-            <param name="ios-package" value="CDVConnection" />
-        </feature>
+    
         <feature name="Toast">
             <param name="ios-package" value="Toast" />
             <param name="android-package" value="nl.xservices.plugins.Toast" />
