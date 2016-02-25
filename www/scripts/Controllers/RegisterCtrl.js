@@ -9,8 +9,8 @@ angular.module('slingshot')
 
         $scope.splash = false;
 
-        // cordova.plugins.Keyboard.close();
-        // cordova.plugins.Keyboard.disableScroll(false);
+        cordova.plugins.Keyboard.close();
+        cordova.plugins.Keyboard.disableScroll(false);
 
         $scope.$on("$destroy", function() {
             document.removeEventListener("backbutton", backButtonHandler, false);
@@ -24,7 +24,7 @@ angular.module('slingshot')
             $scope.password = '';
             $scope.serverId = localStorageService.get('serverId') ? localStorageService.get('serverId') : 'https://support.slingshotsoftware.com/g2mxpt01';
             $scope.serverApp = localStorageService.get('serverApp') ? localStorageService.get('serverApp') : 'G2';
-            serverid = localStorageService.get('serverId') ? localStorageService.get('serverId') : 'https://support.slingshotsoftware.com/g2mxpt01';
+
             loginButton = document.getElementById("regBtn");
             regForm = document.getElementById("registerForm");
 
@@ -83,12 +83,11 @@ angular.module('slingshot')
         };
 
         $scope.setScroll = function(isSet, offSet) {
-            // if (device.platform == 'iOS') {
-            //     offSet = offSet +10;
-            // }
-            regForm.style.transition = "all .5s";
-            regForm.style.top = offSet + "%";
-            document.getElementById("registerOuter").style.height = 30 + "%";
+            if (device.platform !== 'iOS') {
+                regForm.style.transition = "all .5s";
+                regForm.style.top = offSet + "%";
+                document.getElementById("registerOuter").style.height = 30 + "%";
+            }
         };
 
         $scope.TextWatcher = function(userId, password, serverId, serverApp) {
@@ -106,13 +105,12 @@ angular.module('slingshot')
             document.getElementById("registerOuter").style.height = 0 + "%";
             regForm.style.top = "0%";
             regForm.style.transition = "all .5s";
-            // userid = userId, pass = password, serverid = serverId, serverapp = serverApp;
 
             if (chkInputFields(userId, password, serverId, serverApp)) {
                 loginButton.value = "Please wait ..";
                 loginButton.style.background = "linear-gradient(#0270D7, #02509F)";
                 loginButton.style.background = "-webkit-linear-gradient(#0270D7, #02509F)";
-                // $scope.userId = userId;
+                
                 if (isNetworkAvailable()) {
                     validateUser(userId, password, serverId, serverApp);
                 } else {
@@ -150,8 +148,8 @@ angular.module('slingshot')
                     if (btnIndex == 1) {
                         $scope.userId = '';
                         $scope.password = '';
-                        $scope.serverId = serverid;
-                        resetButton();
+
+                        showLoginButton();
                     } else {
                         if (device.platform === 'iOS') {
                             $cordovaDialogs.exitApp();
@@ -188,15 +186,10 @@ angular.module('slingshot')
                 } else {
                     requestResponseHandler.exHandler(response, loginButton, function(dialog) {
                         if (dialog.selectedButtonOnErrorDialog == 'ReviewSettings') {
-                            //$scope.userId = '';
+                         
                             $scope.password = '';
-                            loginButton.value = "Please register with the server";
-                            $scope.serverId = serverid;
-                            $scope.message = "Login Failed!";
-                            loginButton.value = "Login Failed!";
-                            loginButton.style.background = "#da635d";
-                            loginButton.style.background = "linear-gradient(#ae4f4a, #da635d)";
-                            loginButton.style.background = "-webkit-linear-gradient(#ae4f4a, #da635d)";
+                            showLoginButton();
+                          
                         }
                         //if exit button pressed on popup
                         else {
@@ -231,7 +224,6 @@ angular.module('slingshot')
                         if (dialog.selectedButtonOnErrorDialog == 'ReviewSettings') {
                             $scope.userId = '';
                             $scope.password = '';
-                            $scope.serverId = serverid;
                             resetButton();
                         } else {
                             if (device.platform === 'iOS') {
