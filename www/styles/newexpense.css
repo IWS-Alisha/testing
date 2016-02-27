@@ -369,7 +369,7 @@ header {
     font-size: 3vw;
 }
 
-.expenseDiv {
+#expenseDiv {
     position: fixed;
     top: 0%;
     left: 0%;
@@ -518,7 +518,7 @@ header {
     border: solid 1px #CCCCCC;
 }
 
-.desc > .textBox {
+.desc > #textBox {
     position: absolute;
     top: 30%;
     left: 24%;
@@ -527,7 +527,7 @@ header {
     border-radius: 6px;
     font-size: 4.5vw;
     border: solid 1px #CCCCCC;
-    text-transform: capitalize;
+    /*text-transform: capitalize;*/
 }
 
 .desc > .curencyInput {

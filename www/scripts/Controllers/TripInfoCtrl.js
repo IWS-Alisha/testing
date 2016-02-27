@@ -3,13 +3,12 @@
 
   angular.module('slingshot')
 
-  .controller('TripInfoCtrl', ['$scope', '$state', '$window', 'localStorageService', 'soapService', '$rootScope', '$cordovaDialogs', 'initilizeCtrlData',
-      function($scope, $state, $window, localStorageService, soapService, $rootScope, $cordovaDialogs, initilizeCtrlData) {
+  .controller('TripInfoCtrl', ['$scope', '$state', '$window', 'localStorageService', 'soapService', '$rootScope', '$cordovaDialogs', 'initilizeCtrlData', 'toastService',
+      function($scope, $state, $window, localStorageService, soapService, $rootScope, $cordovaDialogs, initilizeCtrlData, toastService) {
 
           cordova.plugins.Keyboard.close();
           cordova.plugins.Keyboard.disableScroll(true);
-
-          $scope.BillingDefaults = localStorageService.get('BillingDefaults');
+          var isLengthDescriptionLengthValid;
 
           $scope.$on("$destroy", function() {
               document.removeEventListener("deviceready", onDeviceReady, false);
@@ -18,6 +17,14 @@
           $scope.$on('$viewContentLoaded', function() {
               document.addEventListener("deviceready", onDeviceReady, false);
               document.addEventListener('backbutton', backButtonHandler, false);
+
+              window.addEventListener("native.keyboardhide", function(e) {
+                  var expenseForm = document.getElementById('tripInfoDiv');
+                  expenseForm.style.top = "0%";
+                  expenseForm.style.transition = "all .5s";
+              });
+
+              $scope.BillingDefaults = localStorageService.get('BillingDefaults');
 
               $scope.DescShow = true;
 
@@ -118,8 +125,13 @@
 
           };
 
-          $scope.setScroll = function(isSet) {
-              cordova.plugins.Keyboard.disableScroll(isSet);
+          $scope.setScroll = function(isSet, offset) {
+              cordova.plugins.Keyboard.disableScroll(isSet, offset);
+              if (device.platform !== 'iOS') {
+                  var expenseForm = document.getElementById('tripInfoDiv');
+                  expenseForm.style.top = offset + "%";
+                  expenseForm.style.transition = "all .5s";
+              }
           };
 
           $scope.descriptionTabChange = function() {
@@ -147,18 +159,31 @@
 
 
           $scope.saveTripInfoTabData = function(description, corpdata, jobdata, entitydata, divdata, costdata, prodata) {
-              console.log(description, corpdata, jobdata, entitydata, divdata, costdata, prodata);
+              // console.log(description, corpdata, jobdata, entitydata, divdata, costdata, prodata);
               cordova.plugins.Keyboard.close();
               if (description != null) {
                   localStorageService.set('TripInfoDescription', description);
               };
-              localStorageService.set('TripInfoCorporateCard', corpdata);
-              localStorageService.set('TripInfoJobNumber', jobdata);
-              localStorageService.set('TripInfoEntity', entitydata);
-              localStorageService.set('TripInfoDivision', divdata);
-              localStorageService.set('TripInfoCostCenter', costdata);
-              localStorageService.set('TripInfoProject', prodata);
-              $window.history.back();
+              checkDecsriptionLength(description);
+              if (!isLengthDescriptionLengthValid) {
+                  toastService.showToast('Description is longet than 250 characters.Please reduce.');
+              } else {
+                  localStorageService.set('TripInfoCorporateCard', corpdata);
+                  localStorageService.set('TripInfoJobNumber', jobdata);
+                  localStorageService.set('TripInfoEntity', entitydata);
+                  localStorageService.set('TripInfoDivision', divdata);
+                  localStorageService.set('TripInfoCostCenter', costdata);
+                  localStorageService.set('TripInfoProject', prodata);
+                  $window.history.back();
+              }
+          };
+
+          function checkDecsriptionLength(description) {
+              if (description.length > 250) {
+                  isLengthDescriptionLengthValid = false;
+              } else {
+                  isLengthDescriptionLengthValid = true;
+              }
           };
 
           $scope.onTripInfoTabBack = function() {
@@ -199,6 +224,15 @@
                   return true;
               } else {
                   return false;
+              }
+          };
+
+          $scope.capitalizeFirstLetter = function(value) {
+              if (value.length > 0) {
+
+                  var str = value.replace(value.substr(0, 1), value.substr(0, 1).toUpperCase());
+                  document.getElementById('textBox').value = str;
+
               }
           };
       }

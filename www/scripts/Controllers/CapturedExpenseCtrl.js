@@ -88,7 +88,8 @@ angular.module('slingshot')
         $scope.newExpense = function() {
             localStorageService.set('scrollTop', 0);
             localStorageService.set('Icon', null);
-            localStorageService.set('getDate', new Date());
+            var date = new Date();
+            localStorageService.set('getDate', date);
 
             $state.go("newexpense");
         };

@@ -25,6 +25,13 @@ angular.module('slingshot')
         $scope.$on('$viewContentLoaded', function() {
             document.addEventListener("deviceready", onDeviceReady, false);
             document.addEventListener('backbutton', backButtonHandler, false);
+
+            window.addEventListener("native.keyboardhide", function(e) {
+                var expenseForm = document.getElementById('expenseDiv');
+                expenseForm.style.top = "0%";
+                expenseForm.style.transition = "all .5s";
+            });
+
             $scope.expenseHeaderName = 'New Expense';
             $scope.isShowDltButton = false;
             $scope.calender = false;
@@ -36,8 +43,6 @@ angular.module('slingshot')
             $scope.CurrencyCodes = localStorageService.get('CurrencyCodes');
             $scope.ExpenseCodes = localStorageService.get('ExpenseCodes');
 
-            currDate = $scope.date;
-            localStorageService.set('getDate', currDate);
             accountingTab = document.getElementById("AccountTab");
             descriptionTab = document.getElementById("descTab");
             proLabel = document.getElementById('newPro');
@@ -62,6 +67,15 @@ angular.module('slingshot')
             } else {
                 $scope.showBackBtn = true;
             }
+            // window.addEventListener('native.keyboardshow', this.keyboardShowHandler);
+            window.addEventListener('native.keyboardhide', this.keyboardHideHandler);
+
+            this.keyboardHideHandler = function(event) {
+                var expenseForm = document.getElementById('expenseDiv');
+                expenseForm.style.top = "0%";
+                expenseForm.style.transition = "all .5s";
+                console.log('Goodnight, sweet prince');
+            };
         };
 
         function initilizeExpenseData() {
@@ -208,8 +222,13 @@ angular.module('slingshot')
 
         };
 
-        $scope.setScroll = function(isSet) {
+        $scope.setScroll = function(isSet, offset) {
             cordova.plugins.Keyboard.disableScroll(isSet);
+            if (device.platform !== 'iOS') {
+                var expenseForm = document.getElementById('expenseDiv');
+                expenseForm.style.top = offset + "%";
+                expenseForm.style.transition = "all .5s";
+            }
         };
 
         $scope.showDatePicker = function() {
@@ -235,7 +254,9 @@ angular.module('slingshot')
             cordova.plugins.Keyboard.close();
             $scope.calender = false;
             $scope.focusInput = false;
-            $scope.date = localStorageService.get('getDate');
+            var date = localStorageService.get('getDate');
+            $scope.date = new Date(date).toDateString();
+            console.log($scope.date);
         };
 
         $scope.onDescriptionTabClick = function() {
@@ -472,7 +493,7 @@ angular.module('slingshot')
         function backButtonBehaviour() {
             if (localStorageService.get('Icon') === null) {
                 $window.history.back();
-            } else if ($scope.showExpenseCodePicker == true) { 
+            } else if ($scope.showExpenseCodePicker == true) {
                 $scope.showExpenseCodePicker = false;
             } else {
                 if (isExpenseInitialStateChange()) {
@@ -507,5 +528,13 @@ angular.module('slingshot')
             }
         };
 
+        $scope.capitalizeFirstLetter = function(value) {
+            if (value.length > 0) {
+
+                var str = value.replace(value.substr(0, 1), value.substr(0, 1).toUpperCase());
+                document.getElementById('textBox').value = str;
+
+            }
+        };
     }
 ]);

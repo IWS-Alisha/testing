@@ -23,7 +23,7 @@
                     <div id="ExpenseDesc">
                         <p>{{DocItem.description}}</p>
                     </div>
-                    <div id="ExpenseImg" align="center"><img ng-show="DocItem.corporateCard !== null && DocItem.fileData === 0  && DocItem.projectCard === null" ng-src="images/credit_card.png" />
+                <div id="ExpenseImg" align="center"><img ng-show="DocItem.corporateCard !== null && DocItem.fileData === 0 &&   DocItem.projectCard === null" ng-src="images/credit_card.png" />
                         <img ng-show="DocItem.corporateCard !== null && DocItem.fileData !== 0 && DocItem.projectCard === null" ng-src="images/camera_and_card.png" />
                         <img ng-show="DocItem.fileData !== 0  && DocItem.corporateCard === null && DocItem.projectCard === null" ng-src="images/camera_icon.png" />
                         <img ng-show="DocItem.fileData === 0  && DocItem.projectCard !== null && DocItem.corporateCard === null" ng-src="images/customer.png" />

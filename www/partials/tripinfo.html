@@ -1,6 +1,13 @@
-<div class="parentDiv">
-    <header>
-        <h2>Edit trip info</h2></header>
+<div id="tripInfoDiv">
+       <div id="CapturedTitle">
+        <div id="Back" ng-click="onTripInfoTabBack()" on-long-press="onTripInfoTabBack()" ng-show="showBackBtn">
+            <div><img src="images/back.png">
+            </div>
+        </div>
+        <div id="Title">
+            <h2>Edit trip info</h2>
+        </div>
+    </div>
     <img class="doneBttn" src="images/donebtn.jpg" alt="DoneBtn" ng-click="saveTripInfoTabData( description, newcorpdata.name, newjobdata.name, newentitydata.name, newdivdata.name, newcostdata.name, newprodata.name)">
     <div class="demoTab">
         <div class="descTab" id="descTab" ng-click="descriptionTabChange()">
@@ -10,10 +17,7 @@
             <p>Accounting</p>
         </div>
         <div class="decs" ng-show="DescShow">
-            <textarea id="text" ng-model="description" placeholder="Please enter the reason for your trip or expenditure.Without it, you will not be able to submit your report" style="resize:none" ng-focus="setScroll(true)"></textarea>
-        </div>
-        <div class="BackBtn" ng-show="showBackBtn" ng-click="onTripInfoTabBack(description, newcorpdata.name, newjobdata.name, newentitydata.name, newdivdata.name, newcostdata.name, newprodata.name)" on-long-press="onTripInfoTabBack()">
-            <img src="images/back.png">
+            <textarea id="text" ng-model="description" placeholder="Please enter the reason for your trip or expenditure.Without it, you will not be able to submit your report" style="resize:none" ng-focus="setScroll(false, -28)" ng-blur="setScroll(true, 0)" ng-change="capitalizeFirstLetter(description)"></textarea>
         </div>
         <div class="account" ng-show="AccountShow">
             <label class="icorpName">Corporate Card</label>
@@ -34,9 +38,6 @@
         <div class="hideDropDownlistRight" ng-click="hideList()">
         </div>
         <div class="hideDropDownlistBottm" ng-click="hideList()">
-        </div>
-        <div class="BackBtn" ng-show="showBackBtn" ng-click="onTripInfoTabBack(description, newcorpdata.name, newjobdata.name, newentitydata.name, newdivdata.name, newcostdata.name, newprodata.name)" on-long-press="onTripInfoTabBack()">
-            <img src="images/back.png">
         </div>
     </div>
 </div>

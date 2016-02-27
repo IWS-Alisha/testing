@@ -29,11 +29,19 @@ angular.module('slingshot')
         $scope.$on('$viewContentLoaded', function() {
             document.addEventListener("deviceready", onDeviceReady, false);
             document.addEventListener('backbutton', backButtonHandler, false);
+
+            window.addEventListener("native.keyboardhide", function(e) {
+                var expenseForm = document.getElementById('expenseDiv');
+                expenseForm.style.top = "0%";
+                expenseForm.style.transition = "all .5s";
+            });
+
+
             $scope.expenseHeaderName = 'Edit Expense';
             $scope.isShowDltButton = true;
             $scope.calender = false;
             $scope.focusInput = false;
-        
+
             $scope.viewer = false;
             $scope.DescShow = true;
             $scope.hideCurrencyList = false;
@@ -295,7 +303,7 @@ angular.module('slingshot')
             $rootScope.$broadcast("closeList");
             $rootScope.$broadcast("hideList");
         };
-        
+
         $scope.validateAndInsertExpense = function(date, amount, currency, description, corpdata, jobnumber, newentity, divdata, newcostdata, prodata) {
             cordova.plugins.Keyboard.close();
             checkIsExpenseValid(date, amount, currency, description, corpdata, jobnumber, newentity, divdata, newcostdata, prodata);
@@ -365,11 +373,11 @@ angular.module('slingshot')
             sqlService.updateExpense(icon, date, amount, currencyFiledValue, description, corpdata, prodata, newentity, divdata, jobnumber, newcostdata, iconName, fileCount, $stateParams.exId, function(result) {
                 if (result.Success) {
                     // if (isExpenseFilesExist()) {
-                        // if (isExpenseFilesUpdate()) {
-                        updateExpenseFiles();
-                        // } else {
-                        //     $window.history.back();
-                        // }
+                    // if (isExpenseFilesUpdate()) {
+                    updateExpenseFiles();
+                    // } else {
+                    //     $window.history.back();
+                    // }
                     // } else {
                     //     $window.history.back();
                     // }
@@ -410,8 +418,13 @@ angular.module('slingshot')
             });
         };
 
-        $scope.setScroll = function(isSet) {
+        $scope.setScroll = function(isSet, offset) {
             cordova.plugins.Keyboard.disableScroll(isSet);
+            if (device.platform !== 'iOS') {
+                var expenseForm = document.getElementById('expenseDiv');
+                expenseForm.style.top = offset + "%";
+                expenseForm.style.transition = "all .5s";
+            }
         };
 
         $scope.dltExpense = function() {
@@ -547,6 +560,15 @@ angular.module('slingshot')
                 return true;
             } else {
                 return false;
+            }
+        };
+        
+        $scope.capitalizeFirstLetter = function(value) {
+            if (value.length > 0) {
+
+                var str = value.replace(value.substr(0, 1), value.substr(0, 1).toUpperCase());
+                document.getElementById('textBox').value = str;
+
             }
         };
 

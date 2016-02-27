@@ -3,7 +3,7 @@
 angular.module('slingshot', ['ngAnimate', 'ngCookies',
         'ngTouch', 'ngSanitize',
         'ngResource', 'ui.router',
-        'angularSoap', 'ngCordova', 'base64', 'LocalStorageModule', 'hmTouchEvents', '720kb.datepicker', 'angular.filter', 'focus-if', 'ngActivityIndicator', 'uz.mailto'
+        'angularSoap', 'ngCordova', 'base64', 'LocalStorageModule', '720kb.datepicker', 'angular.filter', 'focus-if', 'ngActivityIndicator', 'uz.mailto'
     ])
     .config(function($stateProvider, $urlRouterProvider, $compileProvider) {
         $stateProvider

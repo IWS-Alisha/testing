@@ -28,6 +28,14 @@ angular.module('slingshot')
             loginButton = document.getElementById("regBtn");
             regForm = document.getElementById("registerForm");
 
+            window.addEventListener("native.keyboardhide", function(e) {
+                var regForm = document.getElementById("registerForm");
+                regForm.style.top = "0%";
+                regForm.style.transition = "all .5s";
+                document.getElementById("registerOuter").style.height = 0 + "%";
+            });
+
+
         });
 
         function onDeviceReady() {
@@ -110,7 +118,7 @@ angular.module('slingshot')
                 loginButton.value = "Please wait ..";
                 loginButton.style.background = "linear-gradient(#0270D7, #02509F)";
                 loginButton.style.background = "-webkit-linear-gradient(#0270D7, #02509F)";
-                
+
                 if (isNetworkAvailable()) {
                     validateUser(userId, password, serverId, serverApp);
                 } else {
@@ -186,10 +194,10 @@ angular.module('slingshot')
                 } else {
                     requestResponseHandler.exHandler(response, loginButton, function(dialog) {
                         if (dialog.selectedButtonOnErrorDialog == 'ReviewSettings') {
-                         
+
                             $scope.password = '';
                             showLoginButton();
-                          
+
                         }
                         //if exit button pressed on popup
                         else {
