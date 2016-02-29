@@ -54,7 +54,7 @@ angular.module('slingshot')
             });
 
             if (device.platform !== 'iOS' || device.platform !== 'Android') {
-                $scope.appVersion = '1.1';
+                $scope.appVersion = '';//1.1
                 $scope.appName = 'Expenses';
             }
         };

@@ -57,7 +57,7 @@ angular.module('slingshot')
             });
             //if platform nor the ios and neither the android use the hard coded app name or version number
             if (device.platform !== 'iOS' || device.platform !== 'Android') {
-                $scope.appVersion = '1.1';
+                $scope.appVersion = '';//1.1
                 $scope.appName = 'Expenses';
             }
         };

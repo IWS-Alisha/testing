@@ -30,6 +30,7 @@ angular.module('app', [])
         function _link(scope, element, attrs) {
             var elWidth = element[0].offsetParent.offsetWidth;
             var elHeight = Number(attrs.height);
+            var parentHeight = element[0].offsetParent.offsetHeight;
 
             // モード（pinch or swipe）
             var mode = '';
@@ -91,88 +92,112 @@ angular.module('app', [])
 
             element.on('touchmove', function(evt) {
                 evt.preventDefault();
-                if($rootScope.isZoomedState == true){
-                if (mode === 'swipe' && scale > 1) {
+                if ($rootScope.isZoomedState == true) {
+                    if (mode === 'swipe' && scale > 1) {
 
-                    moveX = evt.touches[0].pageX - startX;
-                    moveY = evt.touches[0].pageY - startY;
+                        moveX = evt.touches[0].pageX - startX;
+                        moveY = evt.touches[0].pageY - startY;
 
-                    positionX = initialPositionX + moveX;
-                    positionY = initialPositionY + moveY;
+                        positionX = initialPositionX + moveX;
+                        positionY = initialPositionY + moveY;
+                        console.log("positionX: " + positionX);
+                        console.log("positionY: " + positionY);
 
-                    if (positionX > 0) {
-                        positionX = 0;
-                    } else if (positionX < elWidth * (1 - scale)) {
-                        positionX = elWidth * (1 - scale);
+                        if (parentHeight > elHeight) {
+                            // if (positionX > 0) {
+                            //     positionX = 0;
+                            // } else if (positionX < elWidth * (1 - scale)) {
+                            //     positionX = elWidth * (1 - scale);
+                            // }
+                            // if (positionY > 0) {
+                            //     positionY = 0;
+                            // } else if (positionY <  elHeight * (1 - scale)) {
+                            //     positionY = elHeight * (1 - scale);
+                            // }
+                            if (positionY > -132)
+                                return;
+                        } else {
+                            if (positionX > 0) {
+                                positionX = 0;
+                            } else if (positionX < elWidth * (1 - scale)) {
+                                positionX = elWidth * (1 - scale);
+                            }
+                            if (positionY > 0) {
+                                positionY = 0;
+                            } else if (positionY < elHeight * (1 - scale)) {
+                                positionY = elHeight * (1 - scale);
+                            }
+                        }
+                        transformElement();
+
+                    } else if (mode === 'pinch') {
+
+                        distance = getDistance(evt);
+                        relativeScale = distance / initialDistance;
+                        scale = relativeScale * initialScale;
+
+                        positionX = originX * (1 - relativeScale) + initialPositionX + moveX;
+                        positionY = originY * (1 - relativeScale) + initialPositionY + moveY;
+                        // if (parentHeight > elHeight) {
+                        //     if (scale < 1.7 && scale > 1) {
+                        //         transformElement();
+                        //     }
+                        // } else {
+                        if (scale > 1) {
+                            transformElement();
+                        }
+                        // }
+                    } else {
+
+                        if (evt.touches.length === 1) {
+                            mode = 'swipe';
+                        } else if (evt.touches.length === 2) {
+                            mode = 'pinch';
+                        }
+
                     }
-                    if (positionY > 0) {
-                        positionY = 0;
-                    } else if (positionY < elHeight * (1 - scale)) {
-                        positionY = elHeight * (1 - scale);
-                    }
-
-                    transformElement();
-
-                } else if (mode === 'pinch') {
-
-                    distance = getDistance(evt);
-                    relativeScale = distance / initialDistance;
-                    scale = relativeScale * initialScale;
-
-                    positionX = originX * (1 - relativeScale) + initialPositionX + moveX;
-                    positionY = originY * (1 - relativeScale) + initialPositionY + moveY;
-                    if (scale > 1){ 
-                        transformElement(); 
-                    }
-
-                } else {
-
-                    if (evt.touches.length === 1) {
-                        mode = 'swipe';
-                    } else if (evt.touches.length === 2) {
-                        mode = 'pinch';
-                    }
-
-                }}
+                }
             });
 
             element.on('touchend', function(evt) {
-                if($rootScope.isZoomedState == true){
-                if (mode === 'pinch') {
+                if ($rootScope.isZoomedState == true) {
+                    if (mode === 'pinch') {
 
-                    if (scale < 1) {
+                        if (scale < 1) {
 
-                        scale = 1;
-                        positionX = 0;
-                        positionY = 0;
+                            scale = 1;
+                            positionX = 0;
+                            positionY = 0;
 
-                    } else if (scale > MAX_SCALE) {
 
-                        scale = MAX_SCALE;
-                        relativeScale = scale / initialScale;
-                        positionX = originX * (1 - relativeScale) + initialPositionX + moveX;
-                        positionY = originY * (1 - relativeScale) + initialPositionY + moveY;
+                        } else if (scale > MAX_SCALE) {
 
+                            scale = MAX_SCALE;
+                            relativeScale = scale / initialScale;
+                            positionX = originX * (1 - relativeScale) + initialPositionX + moveX;
+                            positionY = originY * (1 - relativeScale) + initialPositionY + moveY;
+
+                        }
+                        transformElement(0.1);
                     }
+
+                    // if (scale > 1) {
+
+                    //     if (positionX > 0) {
+                    //         positionX = 0;
+                    //     } else if (positionX < elWidth * (1 - scale)) {
+                    //         positionX = elWidth * (1 - scale);
+                    //     }
+                    //     if (positionY > 0) {
+                    //         positionY = 0;
+                    //     } else if (positionY < elHeight * (1 - scale)) {
+                    //         positionY = elHeight * (1 - scale);
+                    //     }
+
+                    // }
+
 
                 }
-
-                if (scale > 1) {
-
-                    if (positionX > 0) {
-                        positionX = 0;
-                    } else if (positionX < elWidth * (1 - scale)) {
-                        positionX = elWidth * (1 - scale);
-                    }
-                    if (positionY > 0) {
-                        positionY = 0;
-                    } else if (positionY < elHeight * (1 - scale)) {
-                        positionY = elHeight * (1 - scale);
-                    }
-
-                }
-
-                transformElement(0.1);}
             });
 
             function getDistance(evt) {

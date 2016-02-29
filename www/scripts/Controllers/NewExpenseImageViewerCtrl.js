@@ -5,7 +5,7 @@
          function($scope, $state, $window, $cordovaCamera, localStorageService, $cordovaDialogs, $rootScope) {
 
              var viewContainer = document.getElementById("imageSliderContainerID");
-             var views, isRightBtnDisable, isLeftBtnDisable, b64Data, images = [],
+             var views, isRightBtnDisable, isLeftBtnDisable, b64Data, images = [], 
                  viewerWidth, viewerHeight, viewerTop,
                  contentType,
                  index;
