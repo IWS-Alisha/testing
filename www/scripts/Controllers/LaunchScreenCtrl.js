@@ -63,6 +63,7 @@ angular.module('slingshot')
         };
 
         function isNetworkAvailable() {
+            
             if (navigator.connection.type === 'none') {
                 isNetworkAvailable = false;
                 return false;

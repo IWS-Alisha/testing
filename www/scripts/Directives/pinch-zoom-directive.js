@@ -1,7 +1,25 @@
-// sample: http://codepen.io/ktknest/full/LDljw/
-
 'use strict';
 angular.module('slingshot')
+    /**
+ * NOTICE:
+ * This directive is old version!!
+ * Please check this repository:
+ * https://github.com/ktknest/angular-pinch-zoom
+ * /
+
+// sample: http://codepen.io/ktknest/full/LDljw/
+
+angular.module('app', [])
+/**
+ * @ngdoc directive
+ * @name pinchZoom
+ * @restrict A
+ * @scope false
+ *
+ * @description
+ * 要素のピンチアウト・インでの拡大・縮小、拡大時のスワイプ動作を提供
+ *
+ **/
     .directive('pinchZoom', function($rootScope) {
         var _directive = {
             restrict: 'A',
@@ -10,8 +28,8 @@ angular.module('slingshot')
         };
 
         function _link(scope, element, attrs) {
-            var elWidth = element[0].offsetWidth;
-            var elHeight = element[0].offsetHeight;
+            var elWidth = element[0].offsetParent.offsetWidth;
+            var elHeight = Number(attrs.height);
 
             // モード（pinch or swipe）
             var mode = '';
@@ -42,7 +60,6 @@ angular.module('slingshot')
             var startY = 0;
             var moveX = 0;
             var moveY = 0;
-            var count = 0;
 
             element.css({
                 '-webkit-transform-origin': '0 0',
@@ -74,110 +91,93 @@ angular.module('slingshot')
 
             element.on('touchmove', function(evt) {
                 evt.preventDefault();
-                if ($rootScope.isZoomedState == true) {
-                    if (mode === 'swipe' && scale > 1) {
+                if($rootScope.isZoomedState == true){
+                if (mode === 'swipe' && scale > 1) {
 
-                        moveX = evt.touches[0].pageX - startX;
-                        moveY = evt.touches[0].pageY - startY;
+                    moveX = evt.touches[0].pageX - startX;
+                    moveY = evt.touches[0].pageY - startY;
 
-                        positionX = initialPositionX + moveX;
-                        positionY = initialPositionY + moveY;
+                    positionX = initialPositionX + moveX;
+                    positionY = initialPositionY + moveY;
 
-                        if (positionX > 0) {
-                            positionX = 0;
-                        } else if (positionX < elWidth * (1 - scale)) {
-                            positionX = elWidth * (1 - scale);
-                        }
-                        if (positionY > 0) {
-                            positionY = 0;
-                        } else if (positionY < elHeight * (1 - scale)) {
-                            positionY = elHeight * (1 - scale);
-                        }
-
-                        transformElement();
-
-                    } else if (mode === 'pinch') {
-
-                        distance = getDistance(evt);
-                        relativeScale = distance / initialDistance;
-                        scale = relativeScale * initialScale;
-
-                        positionX = originX * (1 - relativeScale) + initialPositionX + moveX;
-                        positionY = originY * (1 - relativeScale) + initialPositionY + moveY;
-
-
-                        if (scale > 1) {
-
-                            if (positionX > 0) {
-                                positionX = 0;
-                            } else if (positionX < elWidth * (1 - scale)) {
-                                positionX = elWidth * (1 - scale);
-                            }
-                            if (positionY > 0) {
-                                positionY = 0;
-                            } else if (positionY < elHeight * (1 - scale)) {
-                                positionY = elHeight * (1 - scale);
-                            }
-                             transformElement();
-                        }
-                       
-
-                    } else {
-
-                        if (evt.touches.length === 1) {
-                            mode = 'swipe';
-                        } else if (evt.touches.length === 2) {
-                            mode = 'pinch';
-                        }
-
+                    if (positionX > 0) {
+                        positionX = 0;
+                    } else if (positionX < elWidth * (1 - scale)) {
+                        positionX = elWidth * (1 - scale);
                     }
-                }
+                    if (positionY > 0) {
+                        positionY = 0;
+                    } else if (positionY < elHeight * (1 - scale)) {
+                        positionY = elHeight * (1 - scale);
+                    }
+
+                    transformElement();
+
+                } else if (mode === 'pinch') {
+
+                    distance = getDistance(evt);
+                    relativeScale = distance / initialDistance;
+                    scale = relativeScale * initialScale;
+
+                    positionX = originX * (1 - relativeScale) + initialPositionX + moveX;
+                    positionY = originY * (1 - relativeScale) + initialPositionY + moveY;
+                    if (scale > 1){ 
+                        transformElement(); 
+                    }
+
+                } else {
+
+                    if (evt.touches.length === 1) {
+                        mode = 'swipe';
+                    } else if (evt.touches.length === 2) {
+                        mode = 'pinch';
+                    }
+
+                }}
             });
 
             element.on('touchend', function(evt) {
-                if ($rootScope.isZoomedState == true) {
-                    if (mode === 'pinch') {
+                if($rootScope.isZoomedState == true){
+                if (mode === 'pinch') {
 
-                        if (scale < 1) {
+                    if (scale < 1) {
 
-                            scale = 1;
-                            positionX = 0;
-                            positionY = 0;
+                        scale = 1;
+                        positionX = 0;
+                        positionY = 0;
 
-                        } else if (scale > MAX_SCALE) {
+                    } else if (scale > MAX_SCALE) {
 
-                            scale = MAX_SCALE;
-                            relativeScale = scale / initialScale;
-                            positionX = originX * (1 - relativeScale) + initialPositionX + moveX;
-                            positionY = originY * (1 - relativeScale) + initialPositionY + moveY;
-
-                        }
-                        transformElement();
+                        scale = MAX_SCALE;
+                        relativeScale = scale / initialScale;
+                        positionX = originX * (1 - relativeScale) + initialPositionX + moveX;
+                        positionY = originY * (1 - relativeScale) + initialPositionY + moveY;
 
                     }
 
-                    if (scale > 1) {
-
-                        if (positionX > 0) {
-                            positionX = 0;
-                        } else if (positionX < elWidth * (1 - scale)) {
-                            positionX = elWidth * (1 - scale);
-                        }
-                        if (positionY > 0) {
-                            positionY = 0;
-                        } else if (positionY < elHeight * (1 - scale)) {
-                            positionY = elHeight * (1 - scale);
-                        }
-                        transformElement();
-                    }
                 }
 
+                if (scale > 1) {
+
+                    if (positionX > 0) {
+                        positionX = 0;
+                    } else if (positionX < elWidth * (1 - scale)) {
+                        positionX = elWidth * (1 - scale);
+                    }
+                    if (positionY > 0) {
+                        positionY = 0;
+                    } else if (positionY < elHeight * (1 - scale)) {
+                        positionY = elHeight * (1 - scale);
+                    }
+
+                }
+
+                transformElement(0.1);}
             });
 
             function getDistance(evt) {
-                // console.log("evt"+evt);
-                var d = Math.sqrt(Math.pow(evt.targetTouches[0].pageX - evt.targetTouches[1].pageX, 2) +
-                    Math.pow(evt.targetTouches[0].pageY - evt.targetTouches[1].pageY, 2));
+                var d = Math.sqrt(Math.pow(evt.touches[0].pageX - evt.touches[1].pageX, 2) +
+                    Math.pow(evt.touches[0].pageY - evt.touches[1].pageY, 2));
                 return parseInt(d, 10);
             }
 

@@ -221,7 +221,7 @@ angular.module('slingshot')
 
         function showAlertIfNoInternetConnectionAvailable() {
             if (navigator.connection.type == 'none') {
-                alert('Warring' + '\n' + ' Cant submit data - no Internet connection.');
+                alert('Warring' + '\n' + 'Cant submit data - no Internet connection.');
             } else {
                 setActionUploadResult();
             }
@@ -459,11 +459,9 @@ angular.module('slingshot')
                         toastService.showToast('The expense report has been posted for approval.');
                     } else {
                         $scope.ShowActionCounts = false;
-                        $cordovaDialogs.confirm('Your expenses have been submitted successfully, but the expense report has failed to be posted for approval.' + response.Message + 'Please access the web application, locate your report and try to re-post.', '', ['Ok', ''])
-                            .then(function(buttonIndex) {
-                                // no button = 0, 'OK' = 1, 'Cancel' = 2
-                                var btnIndex = buttonIndex;
-                                if (btnIndex == 1) {}
+                        $cordovaDialogs.alert('Your expenses have been submitted successfully, but the expense report has failed to be posted for approval.' + response.Message + 'Please access the web application, locate your report and try to re-post.', '', 'Ok')
+                            .then(function() {
+                                // callback success
                             });
 
                     }

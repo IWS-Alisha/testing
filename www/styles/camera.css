@@ -17,13 +17,13 @@
     overflow: hidden;
 }
 
-.slider > img {
+/*.slider > img {
     position: absolute;
     object-fit: contain;
     height: 100%;
     width: 100%;
     /*overflow: hidden;*/
-}
+
 
 /*.slider img:touch,
 .slider img:hover,

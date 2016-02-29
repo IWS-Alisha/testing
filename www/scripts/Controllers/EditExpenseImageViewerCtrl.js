@@ -6,7 +6,8 @@ angular.module('slingshot')
 
             var images = [],
                 expenseId = localStorageService.get('ExpenseId'),
-                fileCount, isRightBtnDisable, isLeftBtnDisable, views, b64Data, contentType, count = 0;
+                fileCount, isRightBtnDisable, isLeftBtnDisable, views, b64Data, contentType, count = 0.,
+                viewerWidth, viewerHeight, viewerTop;
 
             // localStorageService.set('gridShow', false);
             var viewContainer = document.getElementById("imageSliderContainerID");
@@ -46,9 +47,10 @@ angular.module('slingshot')
                     contentType = 'image/png';
                     for (var i = 0; i < $rootScope.images.length; i++) {
                         b64Data = $rootScope.images[i].Data;
+                        getHeightWidth(b64Data);
                         var blob = b64toBlob(b64Data, contentType);
                         var blobUrl = URL.createObjectURL(blob);
-                        images.push({ Data: blobUrl });
+                        images.push({ Data: blobUrl, width: viewerWidth, Height: viewerHeight, Top: viewerTop });
                     }
                     fileCount = $rootScope.images.length;
                     $scope.images = images;
@@ -64,6 +66,28 @@ angular.module('slingshot')
                             $scope.$apply();
                         }
                     });
+                }
+            };
+
+            function getHeightWidth(imageData) {
+                var img = new Image();
+                img.src = "data:image/png;base64," + imageData;
+                var width = img.width;
+                var height = img.height;
+                var slide = document.getElementsByClassName('slider');
+                var aspectRation = width / height;
+                if (aspectRation > 1) {
+                    height = slide[0].offsetWidth / aspectRation;
+                    viewerWidth = slide[0].offsetWidth;
+                    viewerHeight = height;
+                    viewerTop = slide[0].offsetHeight - height;
+                    viewerTop = viewerTop / 2;
+                    viewerTop = viewerTop;
+                } else {
+                    width = slide[0].offsetHeight / aspectRation;
+                    viewerWidth = width;
+                    viewerHeight = slide[0].offsetHeight;
+                    viewerTop = 0;
                 }
             };
 
@@ -128,9 +152,10 @@ angular.module('slingshot')
 
                 navigator.camera.getPicture(function(imageData) {
                     b64Data = imageData;
+                    getHeightWidth(imageData);
                     var blob = b64toBlob(b64Data, contentType);
                     var blobUrl = URL.createObjectURL(blob);
-                    images.push({ Data: blobUrl });
+                    images.push({ Data: blobUrl, width: viewerWidth, Height: viewerHeight, Top: viewerTop });
                     $scope.currentIndex = $scope.images.length - 1;
                     fileCount += 1;
                     setHeader();

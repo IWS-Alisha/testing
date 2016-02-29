@@ -161,13 +161,13 @@
           $scope.saveTripInfoTabData = function(description, corpdata, jobdata, entitydata, divdata, costdata, prodata) {
               // console.log(description, corpdata, jobdata, entitydata, divdata, costdata, prodata);
               cordova.plugins.Keyboard.close();
-              if (description != null) {
-                  localStorageService.set('TripInfoDescription', description);
-              };
               checkDecsriptionLength(description);
               if (!isLengthDescriptionLengthValid) {
                   toastService.showToast('Description is longet than 250 characters.Please reduce.');
               } else {
+                  if (description != null) {
+                      localStorageService.set('TripInfoDescription', description);
+                  };
                   localStorageService.set('TripInfoCorporateCard', corpdata);
                   localStorageService.set('TripInfoJobNumber', jobdata);
                   localStorageService.set('TripInfoEntity', entitydata);
@@ -229,7 +229,6 @@
 
           $scope.capitalizeFirstLetter = function(value) {
               if (value.length > 0) {
-
                   var str = value.replace(value.substr(0, 1), value.substr(0, 1).toUpperCase());
                   document.getElementById('textBox').value = str;
 

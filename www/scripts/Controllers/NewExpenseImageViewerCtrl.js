@@ -6,6 +6,7 @@
 
              var viewContainer = document.getElementById("imageSliderContainerID");
              var views, isRightBtnDisable, isLeftBtnDisable, b64Data, images = [],
+                 viewerWidth, viewerHeight, viewerTop,
                  contentType,
                  index;
              $scope.show = false;
@@ -22,13 +23,14 @@
              $scope.$on('$viewContentLoaded', function() {
                  document.addEventListener("deviceready", onDeviceReady, false);
                  document.addEventListener('backbutton', backButtonHandler, false);
-
-                 contentType = 'image/png';
-                 b64Data = $rootScope.images[0].Data;
-                 // images = $rootScope.images;
-                 var blob = b64toBlob(b64Data, contentType);
-                 var blobUrl = URL.createObjectURL(blob);
-                 images.push({ Data: blobUrl });
+                 for (var i = 0; i < $rootScope.images.length; i++) {
+                     contentType = 'image/png';
+                     b64Data = $rootScope.images[0].Data;
+                     getHeightWidth(b64Data);
+                     var blob = b64toBlob(b64Data, contentType);
+                     var blobUrl = URL.createObjectURL(blob);
+                     images.push({ Data: blobUrl, width: viewerWidth, Height: viewerHeight, Top: viewerTop });
+                 }
                  $scope.images = images;
 
                  $scope.currentIndex = 0;
@@ -102,6 +104,27 @@
                  }
              };
 
+             function getHeightWidth(imageData) {
+                 var img = new Image();
+                 img.src = "data:image/png;base64," + imageData;
+                 var width = img.width;
+                 var height = img.height;
+                 var slide = document.getElementsByClassName('slider');
+                 var aspectRation = width / height;
+                 if (aspectRation > 1) {
+                     height = slide[0].offsetWidth / aspectRation;
+                     viewerWidth = slide[0].offsetWidth;
+                     viewerHeight = height;
+                     viewerTop = slide[0].offsetHeight - height;
+                     viewerTop = viewerTop / 2;
+                     viewerTop = viewerTop;
+                 } else {
+                     width = slide[0].offsetHeight / aspectRation;
+                     viewerWidth = width;
+                     viewerHeight = slide[0].offsetHeight;
+                     viewerTop = 0;
+                 }
+             };
              $scope.takePicture = function() {
                  $scope.viewer = true;
                  var options = {
@@ -112,9 +135,10 @@
                  };
                  navigator.camera.getPicture(function(imageData) {
                      b64Data = imageData;
+                     getHeightWidth(imageData);
                      var blob = b64toBlob(b64Data, contentType);
                      var blobUrl = URL.createObjectURL(blob);
-                     images.push({ Data: blobUrl });
+                     images.push({ Data: blobUrl, width: viewerWidth, Height: viewerHeight, Top: viewerTop });
 
                      $scope.currentIndex = $scope.images.length - 1;
                      setHeader();
@@ -144,8 +168,7 @@
              $scope.prev = function() {
 
                  if (!($scope.currentIndex == 0)) {
-                     $rootScope.isZoomedState = false;
-                     views[$scope.currentIndex].style.webkitTransform = "matrix(1,0,0,1,0,0)";
+
                      $scope.dir = "LTR";
                      $scope.currentIndex = ($scope.currentIndex > 0) ? --$scope.currentIndex : $scope.images.length - 1;
 
@@ -153,6 +176,7 @@
                      views[$scope.currentIndex + 1].style.transition = "all .5s";
                      setHeader();
                      setLeftRightBtn();
+                     $rootScope.isZoomedState = false;
                      resetImageScale();
                  }
              };
@@ -160,7 +184,7 @@
              $scope.next = function() {
 
                  if (!($scope.currentIndex == $scope.images.length - 1)) {
-                     $rootScope.isZoomedState = false;
+
                      $scope.dir = "RTL";
                      $scope.currentIndex = ($scope.currentIndex < $scope.images.length - 1) ? ++$scope.currentIndex : 0;
 
@@ -168,6 +192,7 @@
                      views[$scope.currentIndex - 1].style.transition = "all .5s";
                      setHeader();
                      setLeftRightBtn();
+                     $rootScope.isZoomedState = false;
                      resetImageScale();
                  }
 

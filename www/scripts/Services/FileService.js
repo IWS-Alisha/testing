@@ -2,14 +2,14 @@
 
 angular.module('slingshot')
 
-.service("fileService", ['$timeout', '$cordovaDialogs', 'localStorageService', 'sqlService', 'toastService', '$state', '$rootScope',function($timeout, $cordovaDialogs, localStorageService, sqlService, toastService, $state, $rootScope) {
+.service("fileService", ['$timeout', '$cordovaDialogs', 'localStorageService', 'sqlService', 'toastService', '$state', '$rootScope', function($timeout, $cordovaDialogs, localStorageService, sqlService, toastService, $state, $rootScope) {
     var fileService = this;
 
     var MAX_FILE_SIZE = 1024 * 1024,
         MAX_GRANT_SIZE = 1024 * 1024 * 280;
 
     var contentType = 'image/png',
-    b64Data;
+        b64Data, viewerTop, viewerWidth, viewerHeight;
 
     fileService.removeFiles = function(dir, callback) {
         removeDirectory();
@@ -141,9 +141,10 @@ angular.module('slingshot')
 
             reader.onloadend = function(evt) {
                 b64Data = evt.target.result;
+                getHeightWidth(b64Data);
                 var blob = b64toBlob(b64Data, contentType);
                 var blobUrl = URL.createObjectURL(blob);
-                images.push({ Data: blobUrl });
+                images.push({ Data: blobUrl, width: viewerWidth, Height: viewerHeight, Top: viewerTop });
                 var imageData = {
                     Data: evt.target.result
                 };
@@ -192,5 +193,27 @@ angular.module('slingshot')
 
         var blob = new Blob(byteArrays, { type: contentType });
         return blob;
-    }
+    };
+
+    function getHeightWidth(imageData) {
+        var img = new Image();
+        img.src = "data:image/png;base64," + imageData;
+        var width = img.width;
+        var height = img.height;
+        var slide = document.getElementsByClassName('slider');
+        var aspectRation = width / height;
+        if (aspectRation > 1) {
+            height = slide[0].offsetWidth / aspectRation;
+            viewerWidth = slide[0].offsetWidth;
+            viewerHeight = height;
+            viewerTop = slide[0].offsetHeight - height;
+            viewerTop = viewerTop / 2;
+            viewerTop = viewerTop;
+        } else {
+            width = slide[0].offsetHeight / aspectRation;
+            viewerWidth = width;
+            viewerHeight = slide[0].offsetHeight;
+            viewerTop = 0;
+        }
+    };
 }]);
