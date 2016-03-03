@@ -2,7 +2,7 @@ dropdown {
     float: left;
     display: block;
     width: 250px;
-    z-index: 5;
+    z-index: 5; 
 }
 
 dropdown > div {
