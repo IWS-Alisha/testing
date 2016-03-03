@@ -75,7 +75,7 @@ angular.module('slingshot')
                 var expenseForm = document.getElementById('expenseDiv');
                 expenseForm.style.top = "0%";
                 expenseForm.style.transition = "all .5s";
-                console.log('Goodnight, sweet prince');
+                //console.log('Goodnight, sweet prince');
             };
         };
 

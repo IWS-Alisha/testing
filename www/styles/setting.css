@@ -109,10 +109,10 @@
 #serverUpdateBtn {
     position: absolute;
     top: 35%;
-    left: 20%;
+    left: 15%;
     height: 6.5%;
-    width: 60%;
-    font-size: 3.3vw;
+    width: 70%;
+    font-size: 3vw;
     background: -webkit-linear-gradient(#333333, #474747);
     background: -o-linear-gradient(#333333, #474747);
     background: -moz-linear-gradient(#333333, #474747);

@@ -12,7 +12,7 @@ dropdown2 > div {
 
 dropdown2 > div > div.dropdown2-display {
     position: fixed;
-    width: 11.7%;
+    width: 13%;
     background: #F0F1F3;
     height: 4.7%;
     cursor: pointer;
@@ -54,7 +54,7 @@ dropdown2 > div > div.dropdown2-display > span.placeholder {
 
 dropdown2 > div > div.dropdown2-display > i {
     position: relative;
-    width: 14px;
+    width: 16px;
     margin-left: -24px;
     font-size: 3vw;
     font-weight: bold;
@@ -76,7 +76,7 @@ dropdown2 > div > div.dropdown2-list {
 dropdown2 > div > div.dropdown2-list > div {
     position: fixed;
     width: 100%;
-    z-index: 2;
+    /*z-index: 2;*/
     cursor: pointer;
     background: white;
     margin-top: 47%;

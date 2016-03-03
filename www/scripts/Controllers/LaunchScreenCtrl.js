@@ -18,7 +18,7 @@ angular.module('slingshot')
             window.removeEventListener("native.keyboardhide");
         });
         $scope.$on('$viewContentLoaded', function() {
-            getAppNameAndVersion();
+            //getAppNameAndVersion();
             document.addEventListener("deviceready", onDeviceReady, false);
             document.addEventListener("backbutton", backButtonHandler, false);
         });
@@ -47,17 +47,33 @@ angular.module('slingshot')
             }
         };
 
-        function getAppNameAndVersion(){
-            //get app name from config file
-            $scope.appName = cordova.config.getAppName();
-            //get app version from config file
-            $scope.appVersion = cordova.config.getAppVersion();
-        };
+        // function getAppNameAndVersion(){
+        //     //get app name from config file
+        //     $scope.appName = cordova.config.getAppName();
+        //     //get app version from config file
+        //     $scope.appVersion = cordova.config.getAppVersion();
+        // };
 
-        function showAppNameAndVersionNumber() {
-            //if platform is blackberry use the hard coded app name 
-            if (device.platform === 'blackberry10') {
-                $scope.appVersion = '';//1.1
+        // function showAppNameAndVersionNumber() {
+        //     //if platform is blackberry use the hard coded app name 
+        //     if (device.platform === 'blackberry10') {
+        //         $scope.appVersion = '';//1.1
+        //         $scope.appName = 'Expenses';
+        //     }
+        // };
+
+         function showAppNameAndVersionNumber() {
+            //get app name from config file
+            cordova.getAppVersion.getAppName(function(name) {
+                $scope.appName = name;
+            });
+            //get app version from config file
+            cordova.getAppVersion.getVersionNumber(function(version) {
+                $scope.appVersion = version;
+            });
+            //if platform nor the ios and neither the android use the hard coded app name or version number
+            if (device.platform !== 'iOS' || device.platform !== 'Android') {
+                // $scope.appVersion = '1.1';
                 $scope.appName = 'Expenses';
             }
         };

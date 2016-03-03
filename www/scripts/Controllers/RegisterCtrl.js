@@ -29,7 +29,7 @@ angular.module('slingshot')
             loginButton = document.getElementById("regBtn");
             regForm = document.getElementById("registerForm");
 
-            getAppNameAndVersion();
+            // getAppNameAndVersion();
 
             window.addEventListener("native.keyboardhide", function(e) {
                 var regForm = document.getElementById("registerForm");
@@ -40,14 +40,14 @@ angular.module('slingshot')
 
 
         });
-        
 
-         function getAppNameAndVersion(){
-            //get app name from config file
-            $scope.appName = cordova.config.getAppName();
-            //get app version from config file
-            $scope.appVersion = cordova.config.getAppVersion();
-        };
+
+        //  function getAppNameAndVersion(){
+        //     //get app name from config file
+        //     $scope.appName = cordova.config.getAppName();
+        //     //get app version from config file
+        //     $scope.appVersion = cordova.config.getAppVersion();
+        // };
 
 
         function onDeviceReady() {
@@ -55,9 +55,24 @@ angular.module('slingshot')
             showBackButton();
         };
 
+        // function showAppNameAndVersionNumber() {
+        //     if (device.platform === 'blackberry10') {
+        //         $scope.appVersion = ''; //1.1
+        //         $scope.appName = 'Expenses';
+        //     }
+        // };
         function showAppNameAndVersionNumber() {
-            if (device.platform === 'blackberry10') {
-                $scope.appVersion = ''; //1.1
+            //get app name from config file
+            cordova.getAppVersion.getAppName(function(name) {
+                $scope.appName = name;
+            });
+            //get app version from config file
+            cordova.getAppVersion.getVersionNumber(function(version) {
+                $scope.appVersion = version;
+            });
+            //if platform nor the ios and neither the android use the hard coded app name or version number
+            if (device.platform !== 'iOS' || device.platform !== 'Android') {
+                // $scope.appVersion = '1.1';
                 $scope.appName = 'Expenses';
             }
         };
@@ -111,7 +126,7 @@ angular.module('slingshot')
 
         $scope.submit = function(userId, password, serverId, serverApp) {
 
-            localStorageService.set('willEnableBackButtonOnRegisterPage', false);
+            //localStorageService.set('willEnableBackButtonOnRegisterPage', false);
 
             document.getElementById("registerOuter").style.height = 0 + "%";
             regForm.style.top = "0%";
@@ -162,10 +177,14 @@ angular.module('slingshot')
 
                         showLoginButton();
                     } else {
-                        if (device.platform === 'iOS') {
-                            $cordovaDialogs.exitApp();
-                        } else
-                            navigator.app.exitApp();
+                        if (localStorageService.get('willExitAppFromRegisterState') == true) {
+                            if (device.platform === 'iOS') {
+                                $cordovaDialogs.exitApp();
+                            } else
+                                navigator.app.exitApp();
+                        } else {
+                            $window.history.back();
+                        }
                     }
                 });
         };
@@ -204,10 +223,14 @@ angular.module('slingshot')
                         }
                         //if exit button pressed on popup
                         else {
-                            if (device.platform === 'iOS') {
-                                $cordovaDialogs.exitApp();
-                            } else {
-                                navigator.app.exitApp();
+                            if (localStorageService.get('willExitAppFromRegisterState') == true) {
+                                if (device.platform === 'iOS') {
+                                    $cordovaDialogs.exitApp();
+                                } else {
+                                    navigator.app.exitApp();
+                                }
+                            }else{
+                                $window.history.back();
                             }
                         }
                     });
@@ -237,10 +260,14 @@ angular.module('slingshot')
                             $scope.password = '';
                             resetButton();
                         } else {
-                            if (device.platform === 'iOS') {
-                                $cordovaDialogs.exitApp();
+                            if (localStorageService.get('willExitAppFromRegisterState') == true) {
+                                if (device.platform === 'iOS') {
+                                    $cordovaDialogs.exitApp();
+                                }
+                                navigator.app.exitApp();
+                            } else {
+                                $window.history.back();
                             }
-                            navigator.app.exitApp();
                         }
                     }
                 });

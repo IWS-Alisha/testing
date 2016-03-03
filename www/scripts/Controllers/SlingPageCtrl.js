@@ -38,7 +38,7 @@ angular.module('slingshot')
             document.addEventListener("deviceready", onDeviceReady, false);
             document.addEventListener("backbutton", backButtonHandler, false);
             document.body.style.background = "white";
-            getAppName();
+            // getAppName();
             setTripDescriptionOnView();
             setExpensesAmount();
 
@@ -54,10 +54,26 @@ angular.module('slingshot')
         };
 
         function initilizeAppName() {
-            //if platform is blackberry use the hard coded app name 
-            if (device.platform === 'blackberry10') {
+            // //if platform is blackberry use the hard coded app name 
+            // if (device.platform === 'blackberry10') {
+            //     $scope.appName = 'Expenses';
+            // }
+
+
+            //get app name from config file
+            cordova.getAppVersion.getAppName(function(name) {
+                $scope.appName = name;
+            });
+            //get app version from config file
+            cordova.getAppVersion.getVersionNumber(function(version) {
+                $scope.appVersion = version;
+            });
+            //if platform nor the ios and neither the android use the hard coded app name or version number
+            if (device.platform !== 'iOS' || device.platform !== 'Android') {
+                // $scope.appVersion = '1.1';
                 $scope.appName = 'Expenses';
             }
+
         };
 
         function setTripDescriptionOnView() {

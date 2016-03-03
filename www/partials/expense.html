@@ -29,7 +29,7 @@
             </div>
             <input ng-model="date" id="dateField" ng-click="showDatePicker()" readonly>
             <input type="number" name="input" ng-model="numberdata.value" value="{{value}}" required placeholder="0.0" class="amountField" ng-focus="setScroll(false, 0)" ng-blur="setScroll(false, 0)">
-            <dropdown2 class="curencyInput" placeholder="10" list="CurrencyCodes" selected="newcurrdata" property="Code" ng-hide="hideCurrencyList"></dropdown2>
+            <dropdown2 class="curencyInput" list="CurrencyCodes" selected="newcurrdata" property="Code" ng-hide="hideCurrencyList"></dropdown2>
             <div id="currencyOptional" ng-show="currencyOption">
                 <p id="changeText"></p>
             </div>

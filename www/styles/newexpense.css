@@ -522,7 +522,7 @@ header {
     position: absolute;
     top: 30%;
     left: 24%;
-    width: 75%;
+    width: 70%;
     height: 40%;
     border-radius: 6px;
     font-size: 4.5vw;
@@ -533,8 +533,9 @@ header {
 .desc > .curencyInput {
     position: absolute;
     top: 19%;
-    left: 86%;
+    left: 87%;
     width: 14%;
+    /*z-index: 1;*/
 }
 
 .desc > #currencyOptional {
