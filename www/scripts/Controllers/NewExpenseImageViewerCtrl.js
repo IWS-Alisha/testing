@@ -5,7 +5,7 @@
          function($scope, $state, $window, $cordovaCamera, localStorageService, $cordovaDialogs, $rootScope) {
 
              var viewContainer = document.getElementById("imageSliderContainerID");
-             var views, isRightBtnDisable, isLeftBtnDisable, b64Data, images = [], 
+             var views, isRightBtnDisable, isLeftBtnDisable, b64Data, images = [],
                  viewerWidth, viewerHeight, viewerTop,
                  contentType,
                  index;
@@ -29,7 +29,7 @@
                      getHeightWidth(b64Data);
                      var blob = b64toBlob(b64Data, contentType);
                      var blobUrl = URL.createObjectURL(blob);
-                     images.push({ Data: blobUrl, width: viewerWidth, Height: viewerHeight, Top: viewerTop });
+                     images.push({ Data: blobUrl, Width: viewerWidth, Height: viewerHeight, Top: viewerTop });
                  }
                  $scope.images = images;
 
@@ -107,22 +107,24 @@
              function getHeightWidth(imageData) {
                  var img = new Image();
                  img.src = "data:image/png;base64," + imageData;
-                 var width = img.width;
-                 var height = img.height;
-                 var slide = document.getElementsByClassName('slider');
-                 var aspectRation = width / height;
-                 if (aspectRation > 1) {
-                     height = slide[0].offsetWidth / aspectRation;
-                     viewerWidth = slide[0].offsetWidth;
-                     viewerHeight = height;
-                     viewerTop = slide[0].offsetHeight - height;
-                     viewerTop = viewerTop / 2;
-                     viewerTop = viewerTop;
-                 } else {
-                     width = slide[0].offsetHeight / aspectRation;
-                     viewerWidth = width;
-                     viewerHeight = slide[0].offsetHeight;
-                     viewerTop = 0;
+                 img.onload = function() {
+                     var width = this.width;
+                     var height = this.height;
+                     var slide = document.getElementsByClassName('slider');
+                     var aspectRation = width / height;
+                     if (aspectRation > 1) {
+                         height = slide[0].offsetWidth / aspectRation;
+                         viewerWidth = slide[0].offsetWidth;
+                         viewerHeight = height;
+                         viewerTop = slide[0].offsetHeight - height;
+                         viewerTop = viewerTop / 2;
+                         viewerTop = viewerTop;
+                     } else {
+                         width = slide[0].offsetHeight / aspectRation;
+                         viewerWidth = width;
+                         viewerHeight = slide[0].offsetHeight;
+                         viewerTop = 0;
+                     }
                  }
              };
              $scope.takePicture = function() {
@@ -138,7 +140,7 @@
                      getHeightWidth(imageData);
                      var blob = b64toBlob(b64Data, contentType);
                      var blobUrl = URL.createObjectURL(blob);
-                     images.push({ Data: blobUrl, width: viewerWidth, Height: viewerHeight, Top: viewerTop });
+                     images.push({ Data: blobUrl, Width: viewerWidth, Height: viewerHeight, Top: viewerTop });
 
                      $scope.currentIndex = $scope.images.length - 1;
                      setHeader();

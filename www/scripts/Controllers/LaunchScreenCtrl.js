@@ -15,8 +15,10 @@ angular.module('slingshot')
         $scope.$on("$destroy", function() {
             document.removeEventListener("backbutton", backButtonHandler, false);
             document.removeEventListener("deviceready", onDeviceReady, false);
+            window.removeEventListener("native.keyboardhide");
         });
         $scope.$on('$viewContentLoaded', function() {
+            getAppNameAndVersion();
             document.addEventListener("deviceready", onDeviceReady, false);
             document.addEventListener("backbutton", backButtonHandler, false);
         });
@@ -45,18 +47,16 @@ angular.module('slingshot')
             }
         };
 
-        function showAppNameAndVersionNumber() {
-            // alert('hello world');
+        function getAppNameAndVersion(){
             //get app name from config file
-            cordova.getAppVersion.getAppName(function(name) {
-                $scope.appName = name;
-            });
+            $scope.appName = cordova.config.getAppName();
             //get app version from config file
-            cordova.getAppVersion.getVersionNumber(function(version) {
-                $scope.appVersion = version;
-            });
-            //if platform nor the ios and neither the android use the hard coded app name or version number
-            if (device.platform !== 'iOS' || device.platform !== 'Android') {
+            $scope.appVersion = cordova.config.getAppVersion();
+        };
+
+        function showAppNameAndVersionNumber() {
+            //if platform is blackberry use the hard coded app name 
+            if (device.platform === 'blackberry10') {
                 $scope.appVersion = '';//1.1
                 $scope.appName = 'Expenses';
             }

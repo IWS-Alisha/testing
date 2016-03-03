@@ -10,7 +10,7 @@ angular.module('slingshot')
 
         // console.log('showToast ---- ', text);
 
-        if (localStorageService.get('Platform') === 'blackberry10') {
+        if (device.platform === 'blackberry10') {
 
             showToastBB(text);
         } else {
@@ -49,7 +49,7 @@ angular.module('slingshot')
 
         // console.log('showToast ---- ', text);
 
-        if (localStorageService.get('Platform') === 'blackberry10') {
+        if (device.platform === 'blackberry10') {
 
             showLoaderToastBB(text);
         } else {

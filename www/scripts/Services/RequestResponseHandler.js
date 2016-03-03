@@ -10,8 +10,7 @@ angular.module('slingshot')
         if (response.Code === "InvalidRequest") {
             $cordovaDialogs.confirm('Error' + '\n' + 'Server appears unreachable', '', ['Review Settings', 'Exit'])
                 .then(function(buttonIndex) {
-                    localStorageService.set('Error', false);
-
+                   
                     // no button = 0, 'OK' = 1, 'Cancel' = 2
                     var btnIndex = buttonIndex;
                     if (btnIndex === 1) {
@@ -27,7 +26,6 @@ angular.module('slingshot')
                     }
                 })
         } else if (response.Code === "InvalidSoapResponse") {
-            localStorageService.set('Error', false);
 
             $cordovaDialogs.confirm('Error' + '\n' + 'Server Responded Unusually. Page cannot be displayed', '', ['Review Settings', 'Exit'])
                 .then(function(buttonIndex) {

@@ -38,22 +38,24 @@ angular.module('slingshot')
             document.addEventListener("deviceready", onDeviceReady, false);
             document.addEventListener("backbutton", backButtonHandler, false);
             document.body.style.background = "white";
+            getAppName();
             setTripDescriptionOnView();
             setExpensesAmount();
 
         });
+
+        function getAppName() {
+            //get app name from config file
+            $scope.appName = cordova.config.getAppName();
+        };
 
         function onDeviceReady() {
             initilizeAppName();
         };
 
         function initilizeAppName() {
-            //get app name from config file
-            cordova.getAppVersion.getAppName(function(name) {
-                $scope.appName = name;
-            });
-            //if platform nor the ios and neither the android use the hard coded app name 
-            if (device.platform !== 'iOS' || device.platform !== 'Android') {
+            //if platform is blackberry use the hard coded app name 
+            if (device.platform === 'blackberry10') {
                 $scope.appName = 'Expenses';
             }
         };

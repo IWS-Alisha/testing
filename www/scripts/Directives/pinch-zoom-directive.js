@@ -104,18 +104,18 @@ angular.module('app', [])
                         console.log("positionY: " + positionY);
 
                         if (parentHeight > elHeight) {
-                            // if (positionX > 0) {
-                            //     positionX = 0;
-                            // } else if (positionX < elWidth * (1 - scale)) {
-                            //     positionX = elWidth * (1 - scale);
-                            // }
-                            // if (positionY > 0) {
-                            //     positionY = 0;
-                            // } else if (positionY <  elHeight * (1 - scale)) {
-                            //     positionY = elHeight * (1 - scale);
-                            // }
-                            if (positionY > -132)
-                                return;
+                            if (positionX > 0) {
+                                positionX = 0;
+                            } else if (positionX < elWidth * (1 - scale)) {
+                                positionX = elWidth * (1 - scale);
+                            }
+                            if (positionY > 0) {
+                                positionY = 0;
+                            } else if (positionY <  elHeight - (elHeight/2) * (1 - scale)) {
+                                positionY = elHeight - (elHeight/2) * (1 - scale);
+                            }
+                            // if (positionY > -132)
+                            //     return;
                         } else {
                             if (positionX > 0) {
                                 positionX = 0;

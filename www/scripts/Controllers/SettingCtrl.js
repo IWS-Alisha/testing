@@ -15,7 +15,7 @@ angular.module('slingshot')
         $scope.$on('$viewContentLoaded', function() {
             document.addEventListener("deviceready", onDeviceReady, false);
             document.addEventListener('backbutton', backButtonHandler, false);
-
+             $scope.appVersion = cordova.config.getAppVersion();
             $scope.serverAddress = localStorageService.get('serverId');
 
         });
@@ -26,12 +26,7 @@ angular.module('slingshot')
             } else {
                 $scope.showBackBtn = true;
             }
-            //get app version from config file
-            cordova.getAppVersion.getVersionNumber(function(version) {
-                $scope.appVersion = version;
-            });
-
-            if (device.platform !== 'iOS' || device.platform !== 'Android') {
+            if (device.platform === 'blackberry10') {
                 $scope.appVersion = '1.1';
             }
         };

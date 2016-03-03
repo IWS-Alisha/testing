@@ -33,5 +33,13 @@
         },
         "is_top_level": true,
         "variables": {}
+    },
+    "cordova-plugin-config": {
+        "source": {
+            "type": "local",
+            "path": "/Users/metesoft_raman/Downloads/cordova-plugin-config"
+        },
+        "is_top_level": true,
+        "variables": {}
     }
 }

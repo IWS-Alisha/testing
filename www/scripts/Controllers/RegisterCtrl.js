@@ -15,6 +15,7 @@ angular.module('slingshot')
         $scope.$on("$destroy", function() {
             document.removeEventListener("backbutton", backButtonHandler, false);
             document.removeEventListener("deviceready", onDeviceReady, false);
+            window.removeEventListener("native.keyboardhide");
         });
         $scope.$on('$viewContentLoaded', function() {
             document.addEventListener("deviceready", onDeviceReady, false);
@@ -28,6 +29,8 @@ angular.module('slingshot')
             loginButton = document.getElementById("regBtn");
             regForm = document.getElementById("registerForm");
 
+            getAppNameAndVersion();
+
             window.addEventListener("native.keyboardhide", function(e) {
                 var regForm = document.getElementById("registerForm");
                 regForm.style.top = "0%";
@@ -37,6 +40,15 @@ angular.module('slingshot')
 
 
         });
+        
+
+         function getAppNameAndVersion(){
+            //get app name from config file
+            $scope.appName = cordova.config.getAppName();
+            //get app version from config file
+            $scope.appVersion = cordova.config.getAppVersion();
+        };
+
 
         function onDeviceReady() {
             showAppNameAndVersionNumber();
@@ -44,17 +56,8 @@ angular.module('slingshot')
         };
 
         function showAppNameAndVersionNumber() {
-            //get app name from config file
-            cordova.getAppVersion.getAppName(function(name) {
-                $scope.appName = name;
-            });
-            //get app version from config file
-            cordova.getAppVersion.getVersionNumber(function(version) {
-                $scope.appVersion = version;
-            });
-
-            if (device.platform !== 'iOS' || device.platform !== 'Android') {
-                $scope.appVersion = '';//1.1
+            if (device.platform === 'blackberry10') {
+                $scope.appVersion = ''; //1.1
                 $scope.appName = 'Expenses';
             }
         };

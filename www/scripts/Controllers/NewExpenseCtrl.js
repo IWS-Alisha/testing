@@ -20,6 +20,7 @@ angular.module('slingshot')
         $scope.$on("$destroy", function() {
             document.removeEventListener("deviceready", onDeviceReady, false);
             document.removeEventListener("backbutton", backButtonHandler, false);
+            window.removeEventListener("native.keyboardhide");
         });
 
         $scope.$on('$viewContentLoaded', function() {
