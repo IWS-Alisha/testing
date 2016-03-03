@@ -1,100 +1,107 @@
 <?xml version='1.0' encoding='utf-8'?>
-    <widget id="com.slingshotsoftware.mobile.ExpenseCapture" version="1.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-        <name>Expenses</name>
-        <description>
-            A sample Apache Cordova application that responds to the deviceready event.
-        </description>
-        <author email="dev@cordova.apache.org" href="http://cordova.io">
-            Apache Cordova Team
-        </author>
-        <content src="index.html" />
-        <plugin name="cordova-plugin-whitelist" version="1" />
-        <access origin="*" />
-        <allow-intent href="http://*/*" />
-        <allow-intent href="https://*/*" />
-        <allow-intent href="tel:*" />
-        <allow-intent href="sms:*" />
-        <allow-intent href="mailto:*" />
-        <allow-intent href="geo:*" />
-        <platform name="android">
-            <allow-intent href="market:*" />
-            <icon src="www/images/icon/android/ldpi.png" density="ldpi" />
-            <icon src="www/images/icon/android/mdpi.png" density="mdpi" />
-            <icon src="www/images/icon/android/hdpi.png" density="hdpi" />
-            <icon src="www/images/icon/android/xhdpi.png" density="xhdpi" />
-        </platform>
-        <platform name="ios">
-            <allow-intent href="itms:*" />
-            <allow-intent href="itms-apps:*" />
-            <icon src="www/images/icon/ios/icon-60@3x.png" width="180" height="180" />
-            <!-- iOS 7.0+ -->
-            <!-- iPhone / iPod Touch  -->
-            <icon src="www/images/icon/ios/icon-60.png" width="60" height="60" />
-            <icon src="www/images/icon/ios/icon-60@2x.png" width="120" height="120" />
-            <!-- iPad -->
-            <icon src="www/images/icon/ios/icon-76.png" width="76" height="76" />
-            <icon src="www/images/icon/ios/icon-76@2x.png" width="152" height="152" />
-            <!-- iOS 6.1 -->
-            <!-- Spotlight Icon -->
-            <icon src="www/images/icon/ios/icon-40.png" width="40" height="40" />
-            <icon src="www/images/icon/ios/icon-40@2x.png" width="80" height="80" />
-            <!-- iPhone / iPod Touch -->
-            <icon src="www/images/icon/ios/icon.png" width="57" height="57" />
-            <icon src="www/images/icon/ios/icon@2x.png" width="114" height="114" />
-            <!-- iPad -->
-            <icon src="www/images/icon/ios/icon-72.png" width="72" height="72" />
-            <icon src="www/images/icon/ios/icon-72@2x.png" width="144" height="144" />
-            <!-- iPhone Spotlight and Settings Icon -->
-            <icon src="www/images/icon/ios/icon-small.png" width="29" height="29" />
-            <icon src="www/images/icon/ios/icon-small@2x.png" width="58" height="58" />
-            <!-- iPad Spotlight and Settings Icon -->
-            <icon src="www/images/icon/ios/icon-50.png" width="50" height="50" />
-            <icon src="www/images/icon/ios/icon-50@2x.png" width="100" height="100" />
-            <icon src="www/images/icon/ios/icon-50@3x.png" width="180" height="180" />
-            <splash src="www/images/screen/ios/bg.png" width="640" height="960" />
-            <splash src="www/images/screen/ios/bg2.png" width="1536" height="2048" />
-            <splash src="www/images/screen/ios/bg3.png" width="320" height="480" />
-            <splash src="www/images/screen/ios/bg4.png" width="640" height="1136" />
-            <splash src="www/images/screen/ios/bg5.png" width="750" height="1334" />
-            <splash src="www/images/screen/ios/bg6.png" width="1242" height="2208" />
-            <splash src="www/images/screen/ios/bg7.png" width="768" height="1024" />
-        </platform>
-        <platform name="wp8">
-            <icon src="www/images/icon/wp/ApplicationIcon.png" width="99" height="99" />
-            <!-- tile image -->
-            <icon src="www/images/icon/wp/Background.png" width="159" height="159" />
-        </platform>
-     <!--    <platform name="blackberry10">
+<widget id="com.slingshotsoftware.mobile.ExpenseCapture" version="1.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <name>Expenses</name>
+    <description>
+        A sample Apache Cordova application that responds to the deviceready event.
+    </description>
+    <author email="dev@cordova.apache.org" href="http://cordova.io">
+        Apache Cordova Team
+    </author>
+    <!-- CordovaConfigFeflection Hooks: generate cordova_config_reflection.js on app build -->
+    <hook type="after_prepare" src="hooks/generateConfigReflection.js" />
+    <!-- Works well for iOS both in VS and in Cordova CLI. -->
+    <hook type="before_compile" src="hooks/generateConfigReflection.js" />
+    <!-- Works better in VS. -->
+    <hook type="pre_package" src="hooks/generateConfigReflection.js" />
+    <!-- Works better in Cordova CLI. -->
+    <!-- End CordovaConfigFeflection Hooks -->
+    <content src="index.html" />
+    <plugin name="cordova-plugin-whitelist" version="1" />
+    <access origin="*" />
+    <allow-intent href="http://*/*" />
+    <allow-intent href="https://*/*" />
+    <allow-intent href="tel:*" />
+    <allow-intent href="sms:*" />
+    <allow-intent href="mailto:*" />
+    <allow-intent href="geo:*" />
+    <platform name="android">
+        <allow-intent href="market:*" />
+        <icon src="www/images/icon/android/ldpi.png" density="ldpi" />
+        <icon src="www/images/icon/android/mdpi.png" density="mdpi" />
+        <icon src="www/images/icon/android/hdpi.png" density="hdpi" />
+        <icon src="www/images/icon/android/xhdpi.png" density="xhdpi" />
+    </platform>
+    <platform name="ios">
+        <allow-intent href="itms:*" />
+        <allow-intent href="itms-apps:*" />
+        <icon src="www/images/icon/ios/icon-60@3x.png" width="180" height="180" />
+        <!-- iOS 7.0+ -->
+        <!-- iPhone / iPod Touch  -->
+        <icon src="www/images/icon/ios/icon-60.png" width="60" height="60" />
+        <icon src="www/images/icon/ios/icon-60@2x.png" width="120" height="120" />
+        <!-- iPad -->
+        <icon src="www/images/icon/ios/icon-76.png" width="76" height="76" />
+        <icon src="www/images/icon/ios/icon-76@2x.png" width="152" height="152" />
+        <!-- iOS 6.1 -->
+        <!-- Spotlight Icon -->
+        <icon src="www/images/icon/ios/icon-40.png" width="40" height="40" />
+        <icon src="www/images/icon/ios/icon-40@2x.png" width="80" height="80" />
+        <!-- iPhone / iPod Touch -->
+        <icon src="www/images/icon/ios/icon.png" width="57" height="57" />
+        <icon src="www/images/icon/ios/icon@2x.png" width="114" height="114" />
+        <!-- iPad -->
+        <icon src="www/images/icon/ios/icon-72.png" width="72" height="72" />
+        <icon src="www/images/icon/ios/icon-72@2x.png" width="144" height="144" />
+        <!-- iPhone Spotlight and Settings Icon -->
+        <icon src="www/images/icon/ios/icon-small.png" width="29" height="29" />
+        <icon src="www/images/icon/ios/icon-small@2x.png" width="58" height="58" />
+        <!-- iPad Spotlight and Settings Icon -->
+        <icon src="www/images/icon/ios/icon-50.png" width="50" height="50" />
+        <icon src="www/images/icon/ios/icon-50@2x.png" width="100" height="100" />
+        <icon src="www/images/icon/ios/icon-50@3x.png" width="180" height="180" />
+        <splash src="www/images/screen/ios/bg.png" width="640" height="960" />
+        <splash src="www/images/screen/ios/bg2.png" width="1536" height="2048" />
+        <splash src="www/images/screen/ios/bg3.png" width="320" height="480" />
+        <splash src="www/images/screen/ios/bg4.png" width="640" height="1136" />
+        <splash src="www/images/screen/ios/bg5.png" width="750" height="1334" />
+        <splash src="www/images/screen/ios/bg6.png" width="1242" height="2208" />
+        <splash src="www/images/screen/ios/bg7.png" width="768" height="1024" />
+    </platform>
+    <platform name="wp8">
+        <icon src="www/images/icon/wp/ApplicationIcon.png" width="99" height="99" />
+        <!-- tile image -->
+        <icon src="www/images/icon/wp/Background.png" width="159" height="159" />
+    </platform>
+    <!--    <platform name="blackberry10">
             <preference name="websecurity" value="disable" />
             <icon src="www/images/icon/bb10/icon-86.png" />
             <icon src="www/images/icon/bb10/icon-150.png" />
         </platform> -->
-        <preference name="Orientation" value="portrait" />
-        <preference name="Fullscreen" value="true" />
-        <preference name="SplashScreenDelay" value="0" />
-        <preference name="DisallowOverscroll" value="true" />
-        <preference name="android-windowSoftInputMode" value="adjustResize" />
-        <preference name="BackupWebStorage" value="none" />
-        <preference name="StatusBarOverlaysWebView" value="false" />
-        <preference name="StatusBarBackgroundColor" value="#000000" />
-        <preference name="KeyboardShrinksView" value="false" />
-    
-        <feature name="Toast">
-            <param name="ios-package" value="Toast" />
-            <param name="android-package" value="nl.xservices.plugins.Toast" />
-            <param name="wp-package" value="Toast" />
-        </feature>
-        <feature name="InAppBrowser">
-            <param name="ios-package" value="CDVInAppBrowser" />
-        </feature>
-        <feature name="Keyboard">
-            <param name="ios-package" value="CDVKeyboard" onload="true" />
-            <param name="android-package" value="com.ionic.keyboard.IonicKeyboard" />
-            <param name="onload" value="true" />
-        </feature>
-        <feature name="File">
-            <param name="android-package" value="org.apache.cordova.FileUtils" />
-            <param name="ios-package" value="CDVFile" />
-            <param name="blackberry-package" value="org.apache.cordova.file.FileManager" />
-        </feature>
-    </widget>
+    <preference name="Orientation" value="portrait" />
+    <preference name="Fullscreen" value="true" />
+    <preference name="SplashScreenDelay" value="0" />
+    <preference name="DisallowOverscroll" value="true" />
+    <preference name="android-windowSoftInputMode" value="adjustResize" />
+    <preference name="BackupWebStorage" value="none" />
+    <preference name="StatusBarOverlaysWebView" value="false" />
+    <preference name="StatusBarBackgroundColor" value="#000000" />
+    <preference name="KeyboardShrinksView" value="false" />
+    <feature name="Toast">
+        <param name="ios-package" value="Toast" />
+        <param name="android-package" value="nl.xservices.plugins.Toast" />
+        <param name="wp-package" value="Toast" />
+    </feature>
+    <feature name="InAppBrowser">
+        <param name="ios-package" value="CDVInAppBrowser" />
+    </feature>
+    <feature name="Keyboard">
+        <param name="ios-package" value="CDVKeyboard" onload="true" />
+        <param name="android-package" value="com.ionic.keyboard.IonicKeyboard" />
+        <param name="onload" value="true" />
+    </feature>
+    <feature name="File">
+        <param name="android-package" value="org.apache.cordova.FileUtils" />
+        <param name="ios-package" value="CDVFile" />
+        <param name="blackberry-package" value="org.apache.cordova.file.FileManager" />
+    </feature>
+</widget>

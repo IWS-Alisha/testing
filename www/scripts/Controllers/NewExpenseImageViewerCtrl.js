@@ -110,21 +110,23 @@
                  img.onload = function() {
                      var width = this.width;
                      var height = this.height;
+                     // alert("image Original Height width: "+width+"h: "+height);
                      var slide = document.getElementsByClassName('slider');
                      var aspectRation = width / height;
                      if (aspectRation > 1) {
-                         height = slide[0].offsetWidth / aspectRation;
+                         height = Number(slide[0].offsetWidth / aspectRation);
                          viewerWidth = slide[0].offsetWidth;
                          viewerHeight = height;
                          viewerTop = slide[0].offsetHeight - height;
                          viewerTop = viewerTop / 2;
                          viewerTop = viewerTop;
                      } else {
-                         width = slide[0].offsetHeight / aspectRation;
+                         width = Number(slide[0].offsetHeight / aspectRation);
                          viewerWidth = width;
                          viewerHeight = slide[0].offsetHeight;
                          viewerTop = 0;
                      }
+                      // alert("image aspectRation Height width: "+viewerWidth+"h: "+viewerHeight+"t: "+viewerTop);
                  }
              };
              $scope.takePicture = function() {

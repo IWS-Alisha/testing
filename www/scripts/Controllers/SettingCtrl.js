@@ -15,7 +15,7 @@ angular.module('slingshot')
         $scope.$on('$viewContentLoaded', function() {
             document.addEventListener("deviceready", onDeviceReady, false);
             document.addEventListener('backbutton', backButtonHandler, false);
-             $scope.appVersion = cordova.config.getAppVersion();
+             $scope.appVersion = cordova_config.getAppVersion();
             $scope.serverAddress = localStorageService.get('serverId');
 
         });
