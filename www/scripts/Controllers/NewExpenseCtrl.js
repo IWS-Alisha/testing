@@ -8,7 +8,7 @@ angular.module('slingshot')
     function($scope, $state, $window, localStorageService, $cordovaCamera, $filter, sqlService, toastService, $rootScope, $cordovaDialogs, initilizeCtrlData, fileService) {
 
         cordova.plugins.Keyboard.close();
-
+        cordova.plugins.Keyboard.hideKeyboardAccessoryBar(false);
         var fileCount,
             images = [],
             expenseGLA,

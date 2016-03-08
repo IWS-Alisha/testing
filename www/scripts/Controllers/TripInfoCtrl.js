@@ -9,7 +9,7 @@
           cordova.plugins.Keyboard.close();
           cordova.plugins.Keyboard.disableScroll(true);
           var isLengthDescriptionLengthValid;
-
+          cordova.plugins.Keyboard.hideKeyboardAccessoryBar(false);
           $scope.$on("$destroy", function() {
               document.removeEventListener("deviceready", onDeviceReady, false);
               document.removeEventListener("backbutton", backButtonHandler, false);

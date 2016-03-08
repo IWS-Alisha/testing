@@ -11,7 +11,7 @@ angular.module('slingshot')
 
         cordova.plugins.Keyboard.close();
         cordova.plugins.Keyboard.disableScroll(false);
-
+        cordova.plugins.Keyboard.hideKeyboardAccessoryBar(false);
         $scope.$on("$destroy", function() {
             document.removeEventListener("backbutton", backButtonHandler, false);
             document.removeEventListener("deviceready", onDeviceReady, false);

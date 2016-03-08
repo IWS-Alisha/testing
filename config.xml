@@ -85,6 +85,7 @@
     <preference name="BackupWebStorage" value="none" />
     <preference name="StatusBarOverlaysWebView" value="false" />
     <preference name="StatusBarBackgroundColor" value="#000000" />
+    <preference name="HideKeyboardFormAccessoryBar" value="false" />
     <preference name="KeyboardShrinksView" value="false" />
     <feature name="Toast">
         <param name="ios-package" value="Toast" />

@@ -21,7 +21,6 @@ angular.module('slingshot')
                 document.addEventListener('backbutton', backButtonHandler, false);
 
                 $scope.viewer = false;
-                $scope.currentIndex = 0;
                 getImageCountAndImages();
 
                 views = viewContainer.children;
@@ -45,21 +44,14 @@ angular.module('slingshot')
                 if ($rootScope.images.length != 0) {
                     fileCount = $rootScope.images.length;
                     contentType = 'image/png';
-                    for (var i = 0; i < $rootScope.images.length; i++) {
-                        b64Data = $rootScope.images[i].Data;
-                        getHeightWidth(b64Data);
-                        var blob = b64toBlob(b64Data, contentType);
-                        var blobUrl = URL.createObjectURL(blob);
-                        images.push({ Data: blobUrl, width: viewerWidth, Height: viewerHeight, Top: viewerTop });
-                    }
-                    fileCount = $rootScope.images.length;
-                    $scope.images = images;
-                    setHeaderAndLeftRightButton();
+                    getHeightWidth(0);
+                    $scope.currentIndex = 0;
 
                 } else {
                     fileService.readFiles("images/" + expenseId, function(response) {
                         if (response.Success == true) {
                             images = response.Images;
+                            $scope.currentIndex = 0;
                             $scope.images = response.Images;
                             fileCount = images.length;
                             setHeaderAndLeftRightButton();
@@ -68,28 +60,47 @@ angular.module('slingshot')
                     });
                 }
             };
-
-            function getHeightWidth(imageData) {
-                var img = new Image();
-                img.src = "data:image/png;base64," + imageData;
-                var width = img.width;
-                var height = img.height;
-                var slide = document.getElementsByClassName('slider');
-                var aspectRation = width / height;
-                if (aspectRation > 1) {
-                    height = slide[0].offsetWidth / aspectRation;
-                    viewerWidth = slide[0].offsetWidth;
-                    viewerHeight = height;
-                    viewerTop = slide[0].offsetHeight - height;
-                    viewerTop = viewerTop / 2;
-                    viewerTop = viewerTop;
-                } else {
-                    width = slide[0].offsetHeight / aspectRation;
-                    viewerWidth = width;
-                    viewerHeight = slide[0].offsetHeight;
-                    viewerTop = 0;
+            function getHeightWidth(currentIndex) {
+                if(currentIndex === $rootScope.images.length){
+                    fileCount = $rootScope.images.length;
+                    $scope.images = images;
+                    setHeaderAndLeftRightButton();
+                    $scope.$apply();
+                    return;
                 }
-            };
+                 b64Data = $rootScope.images[currentIndex].Data;
+                 var img = new Image();
+                 img.src = "data:image/png;base64," + b64Data;
+                 img.onload = function() {
+                     console.log(this.width);
+
+
+                     var width = this.width;
+                     var height = this.height;
+                     var slide = document.getElementsByClassName('slider');
+                     var aspectRation = width / height;
+                     var parentWidth = slide[0].offsetWidth;
+                     var parentHeight = slide[0].offsetHeight;
+                     if (aspectRation > 1) {
+                        
+                         viewerWidth = parentWidth;
+                         viewerHeight = viewerWidth/aspectRation;
+                         viewerTop = (parentHeight - viewerHeight)/2;
+                        
+                     } else {
+                       
+                         viewerHeight = parentHeight;
+                         viewerWidth = viewerHeight * aspectRation;
+                         viewerTop = 0;
+                     }
+
+                    var blob = b64toBlob(b64Data, contentType);
+                    var blobUrl = URL.createObjectURL(blob);
+                    images.push({ Data: blobUrl, Width: viewerWidth, Height: viewerHeight, Top: viewerTop });
+                    currentIndex +=1;
+                    getHeightWidth(currentIndex);
+                 }
+             };
 
             function b64toBlob(b64Data, contentType, sliceSize) {
                 contentType = contentType || '';
@@ -152,16 +163,10 @@ angular.module('slingshot')
 
                 navigator.camera.getPicture(function(imageData) {
                     b64Data = imageData;
-                    getHeightWidth(imageData);
-                    var blob = b64toBlob(b64Data, contentType);
-                    var blobUrl = URL.createObjectURL(blob);
-                    images.push({ Data: blobUrl, width: viewerWidth, Height: viewerHeight, Top: viewerTop });
-                    $scope.currentIndex = $scope.images.length - 1;
-                    fileCount += 1;
-                    setHeader();
-                    setLeftRightButton();
                     updateRootScopeImages();
-                    $scope.$apply();
+                    $scope.currentIndex = $rootScope.images.length - 1;
+                    getHeightWidth( $scope.currentIndex );
+                  
                 }, function(err) {
                     $scope.viewer = false;
                     $scope.$digest();
@@ -259,31 +264,21 @@ angular.module('slingshot')
             };
 
             function updateView() {
-                if (!($scope.currentIndex == 0)) {
-                    $scope.dir = "LTR";
-                    $scope.currentIndex = ($scope.currentIndex > 0) ? --$scope.currentIndex : $scope.images.length - 1;
-                    // setLeftRightButton();
-                    views[$scope.currentIndex].style.transition = "all .5s";
-                    views[$scope.currentIndex + 1].style.transition = "all .5s";
-                }
-                if (!($scope.currentIndex == $scope.images.length - 1)) {
-                    if ($scope.currentIndex == 0) {
-                        $scope.dir = "RTL";
-                        $scope.currentIndex = 0;
-                        views[$scope.currentIndex].style.transition = "all .5s";
-                    } else {
-                        $scope.dir = "RTL";
-                        $scope.currentIndex = ($scope.currentIndex < $scope.images.length - 1) ? ++$scope.currentIndex : 0;
-                        // setLeftRightButton();
-                        views[$scope.currentIndex].style.transition = "all .5s";
-                        views[$scope.currentIndex - 1].style.transition = "all .5s";
-                    }
-                }
-                if ($scope.currentIndex == $scope.images.length - 1) {
-                    $scope.dir = "RTL";
-                    $scope.currentIndex = 0;
-                    views[$scope.currentIndex].style.transition = "all .5s";
-                }
+               
+                 if ($scope.images.length == 1 && $scope.currentIndex == 1) {
+                     $scope.dir = "LTR";
+                     $scope.currentIndex = 0;
+                     views[$scope.currentIndex].style.transition = "all .5s";
+                 } else if ($scope.currentIndex == $scope.images.length) {
+                     $scope.dir = "LTR";
+                     $scope.currentIndex = $scope.currentIndex - 1;
+                     views[$scope.currentIndex].style.transition = "all .5s";
+                 } else {
+                     $scope.dir = "RTL";
+                     $scope.currentIndex = ($scope.currentIndex < $scope.images.length - 1) ? ++$scope.currentIndex : 0;
+                     views[$scope.currentIndex].style.transition = "all .5s";
+                     views[$scope.currentIndex - 1].style.transition = "all .5s";
+                 }
                 setHeader();
                 setLeftRightButton();
                 resetImageScale();

@@ -9,7 +9,7 @@ angular.module('slingshot')
 
         cordova.plugins.Keyboard.close();
         cordova.plugins.Keyboard.disableScroll(true);
-
+        cordova.plugins.Keyboard.hideKeyboardAccessoryBar(false);
         var proInput, proLabel,
             currDate, viewData, expenseGLA,
             expenseId = localStorageService.get('ExpenseId'),

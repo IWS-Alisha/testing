@@ -23,21 +23,9 @@
              $scope.$on('$viewContentLoaded', function() {
                  document.addEventListener("deviceready", onDeviceReady, false);
                  document.addEventListener('backbutton', backButtonHandler, false);
-                 for (var i = 0; i < $rootScope.images.length; i++) {
-                     contentType = 'image/png';
-                     b64Data = $rootScope.images[0].Data;
-                     getHeightWidth(b64Data);
-                     var blob = b64toBlob(b64Data, contentType);
-                     var blobUrl = URL.createObjectURL(blob);
-                     images.push({ Data: blobUrl, Width: viewerWidth, Height: viewerHeight, Top: viewerTop });
-                 }
-                 $scope.images = images;
-
+                 getHeightWidth(0);
                  $scope.currentIndex = 0;
 
-                 views = viewContainer.children;
-                 setLeftRightBtn();
-                 setHeader();
              });
 
 
@@ -104,29 +92,46 @@
                  }
              };
 
-             function getHeightWidth(imageData) {
+             function getHeightWidth(currentIndex) {
+                 if (currentIndex === $rootScope.images.length) {
+                     $scope.images = images;
+                     views = viewContainer.children;
+                     setLeftRightBtn();
+                     setHeader();
+                     $scope.$apply();
+                     return;
+                 }
+                 b64Data = $rootScope.images[currentIndex].Data;
                  var img = new Image();
-                 img.src = "data:image/png;base64," + imageData;
+                 img.src = "data:image/png;base64," + b64Data;
                  img.onload = function() {
+                     console.log(this.width);
+
+
                      var width = this.width;
                      var height = this.height;
-                     // alert("image Original Height width: "+width+"h: "+height);
                      var slide = document.getElementsByClassName('slider');
                      var aspectRation = width / height;
+                     var parentWidth = slide[0].offsetWidth;
+                     var parentHeight = slide[0].offsetHeight;
                      if (aspectRation > 1) {
-                         height = Number(slide[0].offsetWidth / aspectRation);
-                         viewerWidth = slide[0].offsetWidth;
-                         viewerHeight = height;
-                         viewerTop = slide[0].offsetHeight - height;
-                         viewerTop = viewerTop / 2;
-                         viewerTop = viewerTop;
+
+                         viewerWidth = parentWidth;
+                         viewerHeight = viewerWidth / aspectRation;
+                         viewerTop = (parentHeight - viewerHeight) / 2;
+
                      } else {
-                         width = Number(slide[0].offsetHeight / aspectRation);
-                         viewerWidth = width;
-                         viewerHeight = slide[0].offsetHeight;
+
+                         viewerHeight = parentHeight;
+                         viewerWidth = viewerHeight * aspectRation;
                          viewerTop = 0;
                      }
-                      // alert("image aspectRation Height width: "+viewerWidth+"h: "+viewerHeight+"t: "+viewerTop);
+
+                     var blob = b64toBlob(b64Data, contentType);
+                     var blobUrl = URL.createObjectURL(blob);
+                     images.push({ Data: blobUrl, Width: viewerWidth, Height: viewerHeight, Top: viewerTop });
+                     currentIndex += 1;
+                     getHeightWidth(currentIndex);
                  }
              };
              $scope.takePicture = function() {
@@ -139,16 +144,13 @@
                  };
                  navigator.camera.getPicture(function(imageData) {
                      b64Data = imageData;
-                     getHeightWidth(imageData);
-                     var blob = b64toBlob(b64Data, contentType);
-                     var blobUrl = URL.createObjectURL(blob);
-                     images.push({ Data: blobUrl, Width: viewerWidth, Height: viewerHeight, Top: viewerTop });
-
-                     $scope.currentIndex = $scope.images.length - 1;
-                     setHeader();
-                     setLeftRightBtn();
                      updateRootScopeImages();
-                     $scope.$digest();
+                     $scope.currentIndex = $rootScope.images.length - 1;
+                     getHeightWidth($scope.currentIndex);
+
+
+
+
                  }, function(err) {
                      $scope.viewer = false;
                      $scope.$digest();
@@ -250,27 +252,20 @@
              };
 
              function updateViewer() {
-                 if (!($scope.currentIndex == 0)) {
+
+                 if ($scope.images.length == 1 && $scope.currentIndex == 1) {
                      $scope.dir = "LTR";
-                     $scope.currentIndex = ($scope.currentIndex > 0) ? --$scope.currentIndex : $scope.images.length - 1;
-                     views[$scope.currentIndex + 1].style.transition = "all .5s";
-                 }
-                 if (!($scope.currentIndex == $scope.images.length - 1)) {
-                     if ($scope.currentIndex == 0) {
-                         $scope.dir = "RTL";
-                         $scope.currentIndex = 0;
-                         views[$scope.currentIndex].style.transition = "all .5s";
-                     } else {
-                         $scope.dir = "RTL";
-                         $scope.currentIndex = ($scope.currentIndex < $scope.images.length - 1) ? ++$scope.currentIndex : 0;
-                         views[$scope.currentIndex].style.transition = "all .5s";
-                         views[$scope.currentIndex - 1].style.transition = "all .5s";
-                     }
-                 }
-                 if ($scope.currentIndex == $scope.images.length - 1) {
-                     $scope.dir = "RTL";
                      $scope.currentIndex = 0;
                      views[$scope.currentIndex].style.transition = "all .5s";
+                 } else if ($scope.currentIndex == $scope.images.length) {
+                     $scope.dir = "LTR";
+                     $scope.currentIndex = $scope.currentIndex - 1;
+                     views[$scope.currentIndex].style.transition = "all .5s";
+                 } else {
+                     $scope.dir = "RTL";
+                     $scope.currentIndex = ($scope.currentIndex < $scope.images.length - 1) ? ++$scope.currentIndex : 0;
+                     views[$scope.currentIndex].style.transition = "all .5s";
+                     views[$scope.currentIndex - 1].style.transition = "all .5s";
                  }
                  resetImageScale();
                  setHeader();
