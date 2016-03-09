@@ -72,7 +72,7 @@ angular.module('slingshot')
                 isNetworkAvailable = true;
                 return true;
             }
-        };
+        }; 
 
         function showDialogIfNoUserLoggedIn() {
 
@@ -82,7 +82,7 @@ angular.module('slingshot')
                     var btnIndex = buttonIndex;
                     if (btnIndex == 1) {
                         $state.go('register');
-                    } else if (btnIndex == 2) {
+                    } else{
                         if (device.platform === 'iOS') {
                             $cordovaDialogs.exitApp();
                         }

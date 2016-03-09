@@ -12,6 +12,7 @@
              $scope.show = false;
              $scope.viewer = false;
              $scope.showImgCount = false;
+             $scope.isZoomedState = false;
 
              localStorageService.set('gridShow', false);
 
@@ -172,35 +173,37 @@
              };
 
              $scope.prev = function() {
+                 // if ($rootScope.isZoomedState == false) {
+                     if (!($scope.currentIndex == 0)) {
 
-                 if (!($scope.currentIndex == 0)) {
+                         $scope.dir = "LTR";
+                         $scope.currentIndex = ($scope.currentIndex > 0) ? --$scope.currentIndex : $scope.images.length - 1;
 
-                     $scope.dir = "LTR";
-                     $scope.currentIndex = ($scope.currentIndex > 0) ? --$scope.currentIndex : $scope.images.length - 1;
-
-                     views[$scope.currentIndex].style.transition = "all .5s";
-                     views[$scope.currentIndex + 1].style.transition = "all .5s";
-                     setHeader();
-                     setLeftRightBtn();
-                     $rootScope.isZoomedState = false;
-                     resetImageScale();
+                         views[$scope.currentIndex].style.transition = "all .5s";
+                         views[$scope.currentIndex + 1].style.transition = "all .5s";
+                         setHeader();
+                         setLeftRightBtn();
+                         // $rootScope.isZoomedState = false;
+                         // resetImageScale();
+                    // }
                  }
              };
 
              $scope.next = function() {
+                 // if ($rootScope.isZoomedState == false) {
+                     if (!($scope.currentIndex == $scope.images.length - 1)) {
 
-                 if (!($scope.currentIndex == $scope.images.length - 1)) {
+                         $scope.dir = "RTL";
+                         $scope.currentIndex = ($scope.currentIndex < $scope.images.length - 1) ? ++$scope.currentIndex : 0;
 
-                     $scope.dir = "RTL";
-                     $scope.currentIndex = ($scope.currentIndex < $scope.images.length - 1) ? ++$scope.currentIndex : 0;
-
-                     views[$scope.currentIndex].style.transition = "all .5s";
-                     views[$scope.currentIndex - 1].style.transition = "all .5s";
-                     setHeader();
-                     setLeftRightBtn();
-                     $rootScope.isZoomedState = false;
-                     resetImageScale();
-                 }
+                         views[$scope.currentIndex].style.transition = "all .5s";
+                         views[$scope.currentIndex - 1].style.transition = "all .5s";
+                         setHeader();
+                         setLeftRightBtn();
+                         // $rootScope.isZoomedState = false;
+                         // resetImageScale();
+                     }
+                 // }
 
              };
 
@@ -267,7 +270,7 @@
                      views[$scope.currentIndex].style.transition = "all .5s";
                      views[$scope.currentIndex - 1].style.transition = "all .5s";
                  }
-                 resetImageScale();
+                 // resetImageScale();
                  setHeader();
                  setLeftRightBtn();
              };

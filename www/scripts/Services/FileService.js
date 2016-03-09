@@ -9,7 +9,7 @@ angular.module('slingshot')
         MAX_GRANT_SIZE = 1024 * 1024 * 280;
 
     var contentType = 'image/png',
-        b64Data, viewerTop, viewerWidth, viewerHeight;
+        b64Data, viewerTop, viewerWidth, viewerHeight, images = [];
 
     fileService.removeFiles = function(dir, callback) {
         removeDirectory();
@@ -99,7 +99,7 @@ angular.module('slingshot')
     fileService.readFiles = function(dir, callback) {
         var counter = 0,
             fileEntry,
-            imageList = [],
+            imageList = [];
             images = [];
         readDirectory();
 
@@ -142,9 +142,6 @@ angular.module('slingshot')
             reader.onloadend = function(evt) {
                 b64Data = evt.target.result;
                 getHeightWidth(b64Data);
-                var blob = b64toBlob(b64Data, contentType);
-                var blobUrl = URL.createObjectURL(blob);
-                images.push({ Data: blobUrl, width: viewerWidth, Height: viewerHeight, Top: viewerTop });
                 var imageData = {
                     Data: evt.target.result
                 };
@@ -195,25 +192,35 @@ angular.module('slingshot')
         return blob;
     };
 
-    function getHeightWidth(imageData) {
-        var img = new Image();
-        img.src = "data:image/png;base64," + imageData;
-        var width = img.width;
-        var height = img.height;
-        var slide = document.getElementsByClassName('slider');
-        var aspectRation = width / height;
-        if (aspectRation > 1) {
-            height = slide[0].offsetWidth / aspectRation;
-            viewerWidth = slide[0].offsetWidth;
-            viewerHeight = height;
-            viewerTop = slide[0].offsetHeight - height;
-            viewerTop = viewerTop / 2;
-            viewerTop = viewerTop;
-        } else {
-            width = slide[0].offsetHeight / aspectRation;
-            viewerWidth = width;
-            viewerHeight = slide[0].offsetHeight;
-            viewerTop = 0;
-        }
-    };
+       function getHeightWidth(b64Data) {
+                var img = new Image();
+                 img.src = "data:image/png;base64," + b64Data;
+                 img.onload = function() {
+                     console.log(this.width);
+
+
+                     var width = this.width;
+                     var height = this.height;
+                     var slide = document.getElementsByClassName('slider');
+                     var aspectRation = width / height;
+                     var parentWidth = slide[0].offsetWidth;
+                     var parentHeight = slide[0].offsetHeight;
+                     if (aspectRation > 1) {
+
+                         viewerWidth = parentWidth;
+                         viewerHeight = viewerWidth / aspectRation;
+                         viewerTop = (parentHeight - viewerHeight) / 2;
+
+                     } else {
+
+                         viewerHeight = parentHeight;
+                         viewerWidth = viewerHeight * aspectRation;
+                         viewerTop = 0;
+                     }
+
+                     var blob = b64toBlob(b64Data, contentType);
+                     var blobUrl = URL.createObjectURL(blob);
+                     images.push({ Data: blobUrl, Width: viewerWidth, Height: viewerHeight, Top: viewerTop });
+                 }
+             };
 }]);

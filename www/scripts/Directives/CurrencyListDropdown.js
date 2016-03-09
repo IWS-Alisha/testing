@@ -3,12 +3,12 @@
 angular.module('slingshot')
     .run(['$rootScope', function($rootScope) {
         angular.element(document).on("click", function(e) {
-            // $rootScope.$broadcast("hideList");
+            $rootScope.$broadcast("hideList");
         });
     }]);
 
 angular.module('slingshot')
-    .directive("dropdown", function($rootScope) {
+    .directive("dropdown2", function($rootScope) {
         return {
             restrict: "E",
             templateUrl: "partials/currencyDropdown.html",
@@ -44,7 +44,6 @@ angular.module('slingshot')
                     if (scope.listVisible == true) {
                         scope.listVisible = false;
                     }
-                    //scope.$apply();
                 });
 
                 scope.$watch("selected", function(value) {
@@ -53,7 +52,6 @@ angular.module('slingshot')
                         scope.display = scope.selected[scope.property];
                         scope.listVisible = false;
                     }
-
                 });
             }
         }

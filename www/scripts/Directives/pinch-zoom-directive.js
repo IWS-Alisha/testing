@@ -228,11 +228,12 @@ angular.module('slingshot')
 .directive('pinchZoom', function() {
     var _directive = {
         restrict: 'A',
-        scope: false,
+        scope: { nextFn: '&', prevFn: '&' },
         link: _link
     };
 
     function _link(scope, element, attrs) {
+        var sensitivityOfSwipe = 70 //more value means more finger needs to be slide to swipe left or right
         var elWidth, elHeight;
         var mode = '';
         var distance = 0;
@@ -259,22 +260,24 @@ angular.module('slingshot')
         var offsetTop = 0;
         var image = new Image();
         image.onload = function() {
+            scale = 1;
             elWidth = element[0].width;
             elHeight = element[0].height;
             offsetTop = element[0].offsetTop;
             // console.log("Element: " + element[0])
-            console.log("Element[0]Width: " + element[0].width);
-            console.log("Element[0] height: " + element[0].height);
-            console.log("Element[0] offsettop: " + element[0].offsetTop);
+            // console.log("Element[0]Width: " + element[0].width);
+            // console.log("Element[0] height: " + element[0].height);
+            // console.log("Element[0] offsettop: " + element[0].offsetTop);
 
 
-            console.log("This Natural Width: " + this.naturalWidth);
-            console.log("This Natural Height: " + this.naturalHeight);
-            //console.log("Element[0] offsettop: " + this.offsetTop);
+            // console.log("This Natural Width: " + this.naturalWidth);
+            // console.log("This Natural Height: " + this.naturalHeight);
+            // //console.log("Element[0] offsettop: " + this.offsetTop);
 
 
-            console.log("This Width: " + this.width);
-            console.log("This Height: " + this.height);
+            // console.log("This Width: " + this.width);
+            // console.log("This Height: " + this.height);
+            console.log("Image Load called");
             //console.log("Element[0] offsettop: " + element[0].offsetTop);
 
             element.css({
@@ -297,12 +300,13 @@ angular.module('slingshot')
             startY = touches[0].clientY;
             console.log("element Height: " + elHeight + "element width: " + elWidth);
             // console.log("touchstartHandler ");
-            console.log("startX: " + startX);
-            console.log("startY: " + startY);
+            // console.log("startX: " + startX);
+            // console.log("startY: " + startY);
             initialPositionX = positionX;
             initialPositionY = positionY;
-            console.log("initialPositionX: " + initialPositionX);
-            console.log("initialPositionY: " + initialPositionY);
+            // console.log("initialPositionX: " + initialPositionX);
+            // console.log("initialPositionY: " + initialPositionY);
+            console.log("Touch start called");
             moveX = 0;
             moveY = 0;
         }
@@ -310,7 +314,7 @@ angular.module('slingshot')
         function touchmoveHandler(evt) {
             var touches = evt.originalEvent ? evt.originalEvent.touches : evt.touches;
             if (mode === '') {
-                if (touches.length === 1 && scale > 1) {
+                if (touches.length === 1 && scale >= 1) {
                     mode = 'swipe';
                 } else if (touches.length === 2) {
                     mode = 'pinch';
@@ -320,55 +324,78 @@ angular.module('slingshot')
                     originY = touches[0].clientY - parseInt((touches[0].clientY - touches[1].clientY) / 2, 10) - element[0].offsetTop - initialPositionY;
                     //console.log("origin x parseint: " + parseInt((touches[0].clientX - touches[1].clientX) / 2, 10) + " origin y parseint: " + parseInt((touches[0].clientY - touches[1].clientY) / 2, 10));
                     // console.log("originX: " + originX + " OffsetLeft: " + element[0].offsetLeft);
-                    console.log("originY: " + originY + " OffsetTop: " + element[0].offsetTop);
+                    // console.log("originY: " + originY + " OffsetTop: " + element[0].offsetTop);
                 }
             }
             if (mode === 'swipe') {
+                console.log("Touch Move Swipe called");
                 evt.preventDefault();
                 moveX = touches[0].clientX - startX;
                 //if(moveX)
                 moveY = touches[0].clientY - startY;
                 console.log(touches[0].clientY);
-                console.log('moveX: ' + moveX);
-                console.log('moveY: ' + moveY);
+                // console.log('moveX: ' + moveX);
+                // console.log('moveY: ' + moveY);
+                 
+                console.log("Scale:" + scale);
+                if (scale > 1) {
+                   
+                    positionX = initialPositionX + moveX;
+                    if (isStateOverZoom) {
 
-                positionX = initialPositionX + moveX;
-                positionY = initialPositionY + moveY;
-                // console.log("swipe");
-                console.log("positionX: " + positionX + "Width: " + elWidth * scale);
-                console.log("positionY: " + positionY + "Height: " + elHeight * scale);
+                        positionY = initialPositionY + moveY;
+                        if (moveY > 0) {
+                            if (positionY > -element[0].offsetTop) {
+                                positionY = -element[0].offsetTop;
+                            }
+                        } else {
+                            if (positionY < (elHeight + element[0].offsetTop - (elHeight * scale))) {
+                                positionY = (elHeight + element[0].offsetTop - (elHeight * scale));
+                            }
+                        }
 
-                if (isStateOverZoom) {
-                    if (moveY > 0) {
-                        if (positionY > -element[0].offsetTop) {
-                            positionY = -element[0].offsetTop;
-                        }
-                    } else {
-                        if (positionY < (elHeight + element[0].offsetTop - (elHeight * scale))) {
-                            positionY = (elHeight + element[0].offsetTop - (elHeight * scale));
-                        }
                     }
-
                     if (positionX > 0) {
                         positionX = 0;
                     } else if (positionX < elWidth * (1 - scale)) {
                         positionX = elWidth * (1 - scale);
                     }
-
+                    transformElement();
                 }
 
-                transformElement();
+
+                // console.log("swipe");
+                // console.log("positionX: " + positionX + "Width: " + elWidth * scale);
+                // console.log("positionY: " + positionY + "Height: " + elHeight * scale);
+
+                // if (isStateOverZoom) {
+                //     if (moveY > 0) {
+                //         if (positionY > -element[0].offsetTop) {
+                //             positionY = -element[0].offsetTop;
+                //         }
+                //     } else {
+                //         if (positionY < (elHeight + element[0].offsetTop - (elHeight * scale))) {
+                //             positionY = (elHeight + element[0].offsetTop - (elHeight * scale));
+                //         }
+                //     }
+                // }
+
+
+
+                // }
+
             } else if (mode === 'pinch') {
+                console.log("Touch Move Pinch called");
                 evt.preventDefault();
                 distance = getDistance(touches);
                 relativeScale = distance / initialDistance;
-                console.log("relativeScale: " + relativeScale);
+                // console.log("relativeScale: " + relativeScale);
                 scale = relativeScale * initialScale;
                 positionX = originX * (1 - relativeScale) + initialPositionX + moveX;
                 positionY = originY * (1 - relativeScale) + initialPositionY + moveY;
-                console.log("pinchZoom");
-                console.log("positionX: " + positionX + "moveX: " + moveX + "initialPositionX: " + initialPositionX + "Width: " + elWidth * scale);
-                console.log("positionY: " + positionY + "moveY: " + moveY + "initialPositionY: " + initialPositionY + "Height:" + elHeight * scale);
+                // console.log("pinchZoom");
+                // console.log("positionX: " + positionX + "moveX: " + moveX + "initialPositionX: " + initialPositionX + "Width: " + elWidth * scale);
+                // console.log("positionY: " + positionY + "moveY: " + moveY + "initialPositionY: " + initialPositionY + "Height:" + elHeight * scale);
                 //if scale less than 1 pinch zoom not working
                 if (scale > 1) {
                     transformElement();
@@ -378,6 +405,7 @@ angular.module('slingshot')
         }
 
         function touchendHandler(evt) {
+            console.log("Touch End called");
             var touches = evt.originalEvent ? evt.originalEvent.touches : evt.touches;
             if (mode === '' || touches.length > 0) {
                 return;
@@ -392,17 +420,13 @@ angular.module('slingshot')
                 positionX = originX * (1 - relativeScale) + initialPositionX + moveX;
                 positionY = originY * (1 - relativeScale) + initialPositionY + moveY;
             }
-            // console.log(positionY);
-            if (positionY >= (elHeight + element[0].offsetTop - (elHeight * scale))  && (positionY <= -element[0].offsetTop)) {
-                isStateOverZoom = true;
-            } else  if (positionY <= (elHeight + element[0].offsetTop - (elHeight * scale))  && (positionY >= -element[0].offsetTop)) {
-                isStateOverZoom = false;
-            }
-            if (positionX > 0) {
-                positionX = 0;
-            } else if (positionX < elWidth * (1 - scale)) {
-                positionX = elWidth * (1 - scale);
-            }
+         
+
+            setOverZoomVarialbeIfRequired();
+            // Swipe left or right
+            performSwipeIfRequired();
+
+
             if (positionY > 0) {
                 positionY = 0;
             } else if (positionY < elHeight * (1 - scale)) {
@@ -427,6 +451,40 @@ angular.module('slingshot')
         function getDistance(touches) {
             var d = Math.sqrt(Math.pow(touches[0].clientX - touches[1].clientX, 2) + Math.pow(touches[0].clientY - touches[1].clientY, 2));
             return parseInt(d, 10);
+        }
+
+        function setOverZoomVarialbeIfRequired(){
+               // console.log(positionY);
+            if (positionY >= (elHeight + element[0].offsetTop - (elHeight * scale)) && (positionY <= -element[0].offsetTop)) {
+                isStateOverZoom = true;
+            } else if (positionY <= (elHeight + element[0].offsetTop - (elHeight * scale)) && (positionY >= -element[0].offsetTop)) {
+                isStateOverZoom = false;
+            }
+        }
+        function performSwipeIfRequired() {
+            if (moveX > 1 * sensitivityOfSwipe * (scale > 1.5 ? 1.5 : scale)) {
+                if (positionX >= 0) {
+                    positionX = 0;
+
+                    scope.$apply(function() {
+                        // scope.$eval(attrs.prev); 
+                        scope.prevFn();
+                       // scale = 1;
+              
+
+                    });
+                }
+            } else if (moveX < -1 * sensitivityOfSwipe * (scale > 1.5 ? 1.5 : scale)) {
+                if (positionX <= elWidth * (1 - scale)) {
+                    positionX = elWidth * (1 - scale);
+                    scope.$apply(function() {
+                        // scope.$eval(attrs.next); 
+                        scope.nextFn();
+                      //  scale = 1;
+                       
+                    });
+                }
+            }
         }
 
         function transformElement(duration) {

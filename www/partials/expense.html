@@ -1,4 +1,4 @@
-<div id="expenseDiv">
+<div class="expenseDiv">
     <header>
         <h2>{{expenseHeaderName}}</h2></header>
     <img class="doneBttn" ng-src="images/donebtn.jpg" alt="DoneBtn" ng-click="validateAndInsertExpense(date, numberdata.value, newcurrdata.Code, expense, newcorpdata.name, newjobdata.name, newentitydata.name,newdivdata.name, newcostdata.name, newprodata.name)" />
@@ -11,13 +11,13 @@
             <p>Accounting</p>
         </div>
         <div class="desc" ng-show="DescShow">
-            <div class="myImg" ng-click="showExpenseCodePickerPrompt()" ng-focus="setScroll(true, 0)">
+            <div class="myImg" ng-click="showExpenseCodePickerPrompt()">
                 <img class="imgSrc" id="imgSrc" ng-src="" />
             </div>
             <div class="iconName">
                 <p>{{name}}</p>
             </div>
-            <div id="cameraImg" ng-click="saveExpenseCurrentState(date, numberdata.value, newcurrdata.Code, expense, newcorpdata.name, newjobdata.name, newentitydata.name,newdivdata.name, newcostdata.name, newprodata.name)" ng-focus="setScroll(true, 0)">
+            <div id="cameraImg" ng-click="saveExpenseCurrentState(date, numberdata.value, newcurrdata.Code, expense, newcorpdata.name, newjobdata.name, newentitydata.name,newdivdata.name, newcostdata.name, newprodata.name)">
                 <img class="cameraImg" ng-src="images/cameraBtn.png" />
             </div>
             <div class="imgCount">
@@ -27,13 +27,13 @@
             <div class="cameraText">
                 <p>Images</p>
             </div>
-            <input ng-model="date" id="dateField" ng-click="showDatePicker()" readonly>
+            <input ng-model="date" id="dateField" readonly ng-click="showDatePicker()">
             <input type="number" name="input" ng-model="numberdata.value" value="{{value}}" required placeholder="0.0" class="amountField" ng-focus="setScroll(false, 0)" ng-blur="setScroll(false, 0)">
-            <dropdown2 class="curencyInput" list="CurrencyCodes" selected="newcurrdata" property="Code" ng-hide="hideCurrencyList"></dropdown2>
+            <dropdown2 class="curencyInput" placeholder="Please select currency" list="CurrencyCodes" selected="newcurrdata" property="Code" ng-hide="hideCurrencyList"></dropdown2>
             <div id="currencyOptional" ng-show="currencyOption">
                 <p id="changeText"></p>
             </div>
-            <textarea rows="5" cols="22" id="textBox" ng-model="expense" placeholder="Expense Description" style="resize:none" ng-focus="setScroll(false, -28)" ng-blur="setScroll(false, 0)" ng-change="capitalizeFirstLetter(expense)"></textarea>
+            <textarea rows="5" cols="22" id="textBox" ng-model="expense" placeholder="Expense Description" style="resize:none" ng-focus="setScroll(false, -28)" ng-blur="setScroll(false, 0)"></textarea>
         </div>
         <div class="BackBtn" ng-show="showBackBtn" ng-click="onClickBackButton()" on-long-press="onClickBackButton()">
             <img src="images/back.png">

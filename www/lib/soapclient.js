@@ -207,7 +207,7 @@ SOAPClient._sendSoapRequest = function(url, method, parameters, async, callback,
 
         var obj = {
             "Code": "InvalidRequest",
-            "message": "Server appears unreachable"
+            "Message": "Server appears unreachable"
         };
         callback(obj);
     }
@@ -223,7 +223,8 @@ SOAPClient._onSendSoapRequest = function(method, async, callback, wsdl, req) {
             if (req.responseXML.getElementsByTagName("faultcode").length > 0) {
                 if (async || callback)
                     o = {
-                        "Code": "InvalidSoapResponse"
+                        "Code": "InvalidSoapResponse",
+                        "Message": "Server appears unreachable"
                     }; //new Error(500, req.responseXML.getElementsByTagName("faultstring")[0].childNodes[0].nodeValue);
                 else
                     throw new Error(500, req.responseXML.getElementsByTagName("faultstring")[0].childNodes[0].nodeValue);
@@ -237,7 +238,8 @@ SOAPClient._onSendSoapRequest = function(method, async, callback, wsdl, req) {
     } catch (ex) {
 
         var obj = {
-            "Code": "InvalidSoapResponse"
+            "Code": "InvalidSoapResponse",
+            "Message": "Server appears unreachable"
         };
         callback(obj);
     }

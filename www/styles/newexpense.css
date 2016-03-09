@@ -533,9 +533,9 @@ header {
 .desc > .curencyInput {
     position: absolute;
     top: 19%;
-    left: 87%;
-    width: 14%;
-    /*z-index: 1;*/
+    left: 85%;
+    width: 16%;
+    z-index: 4;
 }
 
 .desc > #currencyOptional {

@@ -2,7 +2,7 @@ dropdown2 {
     float: left;
     display: block;
     width: 250px;
-    z-index: 5; 
+    z-index: 2; 
 }
 
 dropdown2 > div {
@@ -14,7 +14,7 @@ dropdown2 > div > div.dropdown2-display {
     position: fixed;
     width: 10%;
     background: #F0F1F3;
-    height: 4%;
+    height: 5%;
     cursor: pointer;
     border: solid 1px #dddddd;
     box-sizing: border-box;
@@ -24,15 +24,15 @@ dropdown2 > div > div.dropdown2-display {
     box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.3);
     -webkit-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
     -moz-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
-    margin-top: 0px;
+    /*margin-top: 3px;*/
    
 }
 
 dropdown2 > div > div.dropdown2-display > * {
     float: left;
     height: 100%;
-    height: 4%;
-    line-height: 23px !important;
+    height: 5%;
+    line-height: 30px !important;
     display: inline-block;
     vertical-align: middle;
     margin-top: 10px;
@@ -41,14 +41,14 @@ dropdown2 > div > div.dropdown2-display > * {
 dropdown2 > div > div.dropdown2-display > span {
    /* font-size: 2.5vw;*/
     width: 100%;
-    margin-top: -3px;
+    margin-top: 0px;
     /*
 
 
 
     */
     box-sizing: border-box;
-    padding-right: 34px;
+    padding-right: 30px;
     padding-left: 4%;
     padding-top: 2%;
     /*padding: .5%;*/
@@ -70,9 +70,11 @@ dropdown2 > div > div.dropdown2-display > i {
 }
 
 dropdown2 > div > div.dropdown2-list {
+    /*background-color: red;*/
     float: left;
     position: relative;
     width: 100%;
+    /*padding-left: 10px;*/
     transform: scale(1, 0);
     -webkit-transform: scale(1, 0);
     transition: transform ease 250ms;
@@ -83,10 +85,10 @@ dropdown2 > div > div.dropdown2-list {
 dropdown2 > div > div.dropdown2-list > div {
     position: fixed;
     width: 100%;
-    z-index: 2;
+    z-index: 4;
     cursor: pointer;
     background: white;
-    margin-top: 7%;
+    margin-top: 9%;
 }
 
 dropdown2 > div > div.dropdown2-list > div > div {
@@ -96,7 +98,7 @@ dropdown2 > div > div.dropdown2-list > div > div {
     box-sizing: border-box;
     border: solid 1px #dddddd;
     border-top: none;
-    /*text-align: center;*/
+    text-align: center;
 }
 
 dropdown2 > div > div.dropdown2-list > div > div:hover {
@@ -109,9 +111,9 @@ dropdown2 > div > div.dropdown2-list > div > div.selected {
 }
 
 dropdown2 > div > div.dropdown2-list > div > div > * {
-    height: 4%;
+    height: 5%;
    /* margin-top: 0px*/
-    line-height: 21px !important;
+    line-height: 27px !important;
     display: inline-block;
     font-size: 4.2vw;
     vertical-align: middle;

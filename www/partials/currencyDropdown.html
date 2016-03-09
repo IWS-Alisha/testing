@@ -6,8 +6,13 @@
     </div>
     <div class="dropdown2-list">
         <div>
-            <div ng-repeat="item in list" ng-click="select(item)" ng-class="{ selected: isSelected(item) }">
+          <!--   <div ng-repeat="item in list" ng-click="select(item)" ng-class="{ selected: isSelected(item) }">
                 <span>{{property !== undefined ? item[property] : item}}</span>
+                <i class="fa fa-check"></i>
+            </div> -->
+              <div ng-repeat="item in list" ng-click="select(item)" ng-class="{ selected: isSelected(item) }">
+                <span ng-show="item.Code === null">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                <span>{{item.Code}}</span>
                 <i class="fa fa-check"></i>
             </div>
         </div>
