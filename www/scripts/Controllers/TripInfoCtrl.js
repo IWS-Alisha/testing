@@ -231,7 +231,7 @@
           $scope.capitalizeFirstLetter = function(value) {
               if (value.length > 0) {
                   var str = value.replace(value.substr(0, 1), value.substr(0, 1).toUpperCase());
-                  document.getElementById('textBox').value = str;
+                  document.getElementById('text').value = str;
 
               }
           };
