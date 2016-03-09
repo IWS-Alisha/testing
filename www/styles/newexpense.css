@@ -512,7 +512,7 @@ header {
     top: 19%;
     left: 24%;
     height: 6%;
-    width: 55%;
+    width: 53%;
     border-radius: 6px;
     font-size: 5vw;
     border: solid 1px #CCCCCC;
@@ -533,19 +533,20 @@ header {
 .desc > .curencyInput {
     position: absolute;
     top: 19%;
-    left: 85%;
-    width: 16%;
-    z-index: 4;
+    left: 89%;
+    width: 15%;
+    height: 5.8%;
+    z-index: 15;
 }
 
 .desc > #currencyOptional {
     position: absolute;
     top: 16.5%;
-    left: 86%;
+    left: 87%;
     width: 15%;
-    height: 4%;
+    height: 5%;
     color: black;
-    font-size: 4.5vw;
+    font-size: 4vw;
 }
 
 .desc > #currencyOptional > p {

@@ -3,7 +3,7 @@
 angular.module('slingshot')
     .run(['$rootScope', function($rootScope) {
         angular.element(document).on("click", function(e) {
-            $rootScope.$broadcast("hideList");
+            // $rootScope.$broadcast("hideCurrencyList");
         });
     }]);
 
@@ -40,7 +40,7 @@ angular.module('slingshot')
                         });
                 });
 
-                $rootScope.$on("hideList", function() {
+                $rootScope.$on("hideCurrencyList", function() {
                     if (scope.listVisible == true) {
                         scope.listVisible = false;
                     }
