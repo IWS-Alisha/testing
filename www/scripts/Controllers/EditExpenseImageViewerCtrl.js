@@ -284,9 +284,7 @@ angular.module('slingshot')
                      views[$scope.currentIndex].style.transition = "all .5s";
                  } else {
                      $scope.dir = "RTL";
-                     $scope.currentIndex = ($scope.currentIndex < $scope.images.length - 1) ? ++$scope.currentIndex : 0;
                      views[$scope.currentIndex].style.transition = "all .5s";
-                     views[$scope.currentIndex - 1].style.transition = "all .5s";
                  }
                  // resetImageScale();
                  setHeader();

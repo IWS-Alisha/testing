@@ -255,7 +255,7 @@
              };
 
              function updateViewer() {
-
+                    console.log($scope.currentIndex);
                  if ($scope.images.length == 1 && $scope.currentIndex == 1) {
                      $scope.dir = "LTR";
                      $scope.currentIndex = 0;
@@ -265,10 +265,9 @@
                      $scope.currentIndex = $scope.currentIndex - 1;
                      views[$scope.currentIndex].style.transition = "all .5s";
                  } else {
-                     $scope.dir = "RTL";
-                     $scope.currentIndex = ($scope.currentIndex < $scope.images.length - 1) ? ++$scope.currentIndex : 0;
+                     $scope.dir = "RTL"; 
                      views[$scope.currentIndex].style.transition = "all .5s";
-                     views[$scope.currentIndex - 1].style.transition = "all .5s";
+                     // views[$scope.currentIndex - 1].style.transition = "all .5s";
                  }
                  // resetImageScale();
                  setHeader();
