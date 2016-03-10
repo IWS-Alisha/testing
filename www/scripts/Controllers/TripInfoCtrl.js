@@ -167,19 +167,27 @@
               // console.log(description, corpdata, jobdata, entitydata, divdata, costdata, prodata);
               cordova.plugins.Keyboard.close();
               checkDecsriptionLength(description);
-              if (!isLengthDescriptionLengthValid) {
-                  toastService.showToast('Description is longet than 250 characters.Please reduce.');
+              if (description == null || description == undefined || description == "") {
+                  toastService.showToast('please enter description');
+                  $scope.AccountShow = false;
+                  $scope.DescShow = true;
+                  descriptionTab.style.backgroundColor = "white";
+                  accountingTab.style.backgroundColor = "#F0F1F3";
               } else {
-                  if (description != null) {
-                      localStorageService.set('TripInfoDescription', description);
-                  };
-                  localStorageService.set('TripInfoCorporateCard', corpdata);
-                  localStorageService.set('TripInfoJobNumber', jobdata);
-                  localStorageService.set('TripInfoEntity', entitydata);
-                  localStorageService.set('TripInfoDivision', divdata);
-                  localStorageService.set('TripInfoCostCenter', costdata);
-                  localStorageService.set('TripInfoProject', prodata);
-                  $window.history.back();
+                  if (!isLengthDescriptionLengthValid) {
+                      toastService.showToast('Description is longet than 250 characters.Please reduce.');
+                  } else {
+                      if (description != null) {
+                          localStorageService.set('TripInfoDescription', description);
+                      };
+                      localStorageService.set('TripInfoCorporateCard', corpdata);
+                      localStorageService.set('TripInfoJobNumber', jobdata);
+                      localStorageService.set('TripInfoEntity', entitydata);
+                      localStorageService.set('TripInfoDivision', divdata);
+                      localStorageService.set('TripInfoCostCenter', costdata);
+                      localStorageService.set('TripInfoProject', prodata);
+                      $window.history.back();
+                  }
               }
           };
 
