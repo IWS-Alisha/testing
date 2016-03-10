@@ -257,7 +257,7 @@
     height: auto;
 }
 
-.hideDropDownlistBottm {
+#hideDropDownlistBottm {
     position: absolute;
     top: 80%;
     left: 0%;
