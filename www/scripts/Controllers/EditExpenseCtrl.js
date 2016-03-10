@@ -68,6 +68,10 @@ angular.module('slingshot')
             } else {
                 $scope.showBackBtn = true;
             }
+            if(device.platform === 'iOS'){
+                var hidelistAtBottom = document.getElementById('hideDropDownlistBottom');
+                hidelistAtBottom.style.top = "95%";
+            }
         };
 
         function initilizeExpenseData() {
@@ -337,7 +341,7 @@ angular.module('slingshot')
                 descriptionTab.style.backgroundColor = "white";
                 accountingTab.style.backgroundColor = "#F0F1F3";
                 isExpenseValid = false;
-            } else if (description === null || description === undefined) {
+            } else if (description === null || description === undefined || description == "") {
                 toastService.showToast('please enter description');
                 $scope.AccountShow = false;
                 $scope.DescShow = true;
