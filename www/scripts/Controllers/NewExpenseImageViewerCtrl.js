@@ -6,7 +6,7 @@
 
              var viewContainer = document.getElementById("imageSliderContainerID");
              var views, isRightBtnDisable, isLeftBtnDisable, b64Data, images = [],
-                 viewerWidth, viewerHeight, viewerTop,
+                 viewerWidth, viewerHeight, viewerTop, viewerLeft,
                  contentType,
                  index;
              $scope.show = false;
@@ -120,11 +120,13 @@
                          viewerWidth = parentWidth;
                          viewerHeight = viewerWidth / aspectRation;
                          viewerTop = (parentHeight - viewerHeight) / 2;
+                         viewerLeft = 0;
 
                      } else {
 
                          viewerHeight = parentHeight;
                          viewerWidth = viewerHeight * aspectRation;
+                         viewerLeft = (parentWidth - viewerWidth) / 2;
                          viewerTop = 0;
                      }
 

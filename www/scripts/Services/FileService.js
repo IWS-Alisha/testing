@@ -9,7 +9,7 @@ angular.module('slingshot')
         MAX_GRANT_SIZE = 1024 * 1024 * 280;
 
     var contentType = 'image/png',
-        b64Data, viewerTop, viewerWidth, viewerHeight, images = [];
+        b64Data, viewerTop, viewerWidth, viewerHeight, images = [], viewerLeft;
 
     fileService.removeFiles = function(dir, callback) {
         removeDirectory();
@@ -210,11 +210,12 @@ angular.module('slingshot')
                          viewerWidth = parentWidth;
                          viewerHeight = viewerWidth / aspectRation;
                          viewerTop = (parentHeight - viewerHeight) / 2;
-
+                         viewerLeft = 0;
                      } else {
 
                          viewerHeight = parentHeight;
                          viewerWidth = viewerHeight * aspectRation;
+                         viewerLeft = (parentWidth - viewerWidth) / 2;
                          viewerTop = 0;
                      }
 

@@ -40,6 +40,10 @@
               } else {
                   $scope.showBackBtn = true;
               }
+              // if (device.platform === 'iOS') {
+              //     var hidelistAtBottom = document.getElementById('hideDropDownlistBottom');
+              //     hidelistAtBottom.style.top = "95%";
+              // }
           };
 
           function initilizeTripInfoTabData() {

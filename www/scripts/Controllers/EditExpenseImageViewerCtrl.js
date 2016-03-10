@@ -7,7 +7,7 @@ angular.module('slingshot')
             var images = [],
                 expenseId = localStorageService.get('ExpenseId'),
                 fileCount, isRightBtnDisable, isLeftBtnDisable, views, b64Data, contentType, count = 0,
-                viewerWidth, viewerHeight, viewerTop;
+                viewerWidth, viewerHeight, viewerTop, viewerLeft;
                 $scope.isZoomedState = false;
             // localStorageService.set('gridShow', false);
             var viewContainer = document.getElementById("imageSliderContainerID");
@@ -138,17 +138,18 @@ angular.module('slingshot')
                          viewerWidth = parentWidth;
                          viewerHeight = viewerWidth / aspectRation;
                          viewerTop = (parentHeight - viewerHeight) / 2;
-
+                         viewerLeft = 0;
                      } else {
 
                          viewerHeight = parentHeight;
                          viewerWidth = viewerHeight * aspectRation;
+                         viewerLeft = (parentWidth - viewerWidth) / 2;
                          viewerTop = 0;
                      }
 
                      var blob = b64toBlob(b64Data, contentType);
                      var blobUrl = URL.createObjectURL(blob);
-                     images.push({ Data: blobUrl, Width: viewerWidth, Height: viewerHeight, Top: viewerTop });
+                     images.push({ Data: blobUrl, Width: viewerWidth, Height: viewerHeight, Top: viewerTop , Left: viewerLeft});
                      currentIndex += 1;
                      getHeightWidth(currentIndex);
                  }

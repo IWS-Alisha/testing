@@ -68,15 +68,10 @@ angular.module('slingshot')
             } else {
                 $scope.showBackBtn = true;
             }
-            // window.addEventListener('native.keyboardshow', this.keyboardShowHandler);
-            window.addEventListener('native.keyboardhide', this.keyboardHideHandler);
-
-            this.keyboardHideHandler = function(event) {
-                var expenseForm = document.getElementById('expenseDiv');
-                expenseForm.style.top = "0%";
-                expenseForm.style.transition = "all .5s";
-                //console.log('Goodnight, sweet prince');
-            };
+            if (device.platform === 'iOS') {
+                var hidelistAtBottom = document.getElementById('hideDropDownlistBottom');
+                hidelistAtBottom.style.top = "95%";
+            }
         };
 
         function initilizeExpenseData() {
