@@ -132,7 +132,7 @@
 
                      var blob = b64toBlob(b64Data, contentType);
                      var blobUrl = URL.createObjectURL(blob);
-                     images.push({ Data: blobUrl, Width: viewerWidth, Height: viewerHeight, Top: viewerTop });
+                     images.push({ Data: blobUrl, Width: viewerWidth, Height: viewerHeight, Top: viewerTop, Left: viewerLeft });
                      currentIndex += 1;
                      getHeightWidth(currentIndex);
                  }
