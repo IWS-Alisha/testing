@@ -40,10 +40,10 @@
               } else {
                   $scope.showBackBtn = true;
               }
-              if (device.platform === 'iOS') {
-                  var hidelistAtBottom = document.getElementById('hideDropDownlistBottm');
-                  hidelistAtBottom.style.top = "95%";
-              }
+              // if (device.platform === 'iOS') {
+              //     var hidelistAtBottom = document.getElementById('hideDropDownlistBottm');
+              //     hidelistAtBottom.style.top = "95%";
+              // }
           };
 
           function initilizeTripInfoTabData() {
@@ -166,15 +166,15 @@
           $scope.saveTripInfoTabData = function(description, corpdata, jobdata, entitydata, divdata, costdata, prodata) {
               // console.log(description, corpdata, jobdata, entitydata, divdata, costdata, prodata);
               cordova.plugins.Keyboard.close();
-  
+
               if (description == null || description == undefined || description == "") {
                   toastService.showToast('please enter description');
                   $scope.AccountShow = false;
                   $scope.DescShow = true;
-                  descriptionTab.style.backgroundColor = "white";
-                  accountingTab.style.backgroundColor = "#F0F1F3";
+                  document.getElementById("AccountTab").style.backgroundColor = "#F0F1F3";
+                  document.getElementById("descTab").style.backgroundColor = "white";
               } else {
-                checkDecsriptionLength(description);
+                  checkDecsriptionLength(description);
                   if (!isLengthDescriptionLengthValid) {
                       toastService.showToast('Description is longet than 250 characters.Please reduce.');
                   } else {
