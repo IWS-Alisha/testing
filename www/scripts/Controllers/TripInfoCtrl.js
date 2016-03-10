@@ -166,7 +166,7 @@
           $scope.saveTripInfoTabData = function(description, corpdata, jobdata, entitydata, divdata, costdata, prodata) {
               // console.log(description, corpdata, jobdata, entitydata, divdata, costdata, prodata);
               cordova.plugins.Keyboard.close();
-              checkDecsriptionLength(description);
+  
               if (description == null || description == undefined || description == "") {
                   toastService.showToast('please enter description');
                   $scope.AccountShow = false;
@@ -174,6 +174,7 @@
                   descriptionTab.style.backgroundColor = "white";
                   accountingTab.style.backgroundColor = "#F0F1F3";
               } else {
+                checkDecsriptionLength(description);
                   if (!isLengthDescriptionLengthValid) {
                       toastService.showToast('Description is longet than 250 characters.Please reduce.');
                   } else {
