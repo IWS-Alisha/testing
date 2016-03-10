@@ -35,7 +35,8 @@ angular.module('slingshot')
         var isStateOverZoom = false;
         var offsetTop = 0;
         var image = new Image();
-        var didReachLeftOrRight = false;
+        var didReachLeft = false;
+        var didReachRight = false;
         var offsetLeft = 0;
         image.onload = function() {
             scale = 1;
@@ -257,29 +258,28 @@ angular.module('slingshot')
         function performSwipeIfRequired() {
             if (moveX > 1 * sensitivityOfSwipe) {
 
-                if ((!didReachLeftOrRight) && (scale > 1) && (positionX = -element[0].offsetLeft)) {
-                    didReachLeftOrRight = true;
+                if ((!didReachLeft) && (scale > 1) && (positionX = -element[0].offsetLeft)) {
+                    didReachLeft = true;
                     return;
                 }
                 scope.$apply(function() {
                     // scope.$eval(attrs.prev); 
                     scope.prevFn();
-                    didReachLeftOrRight = false;
+                    didReachLeft = false;
                     // scale = 1;
 
                 });
 
             } else if (moveX < -1 * sensitivityOfSwipe) {
 
-
-                if ((!didReachLeftOrRight) && (scale > 1) && (positionX = (elWidth + element[0].offsetLeft - (elWidth * scale)))) {
-                    didReachLeftOrRight = true;
+                if ((!didReachRight) && (scale > 1) && (positionX = (elWidth + element[0].offsetLeft - (elWidth * scale)))) {
+                    didReachRight = true;
                     return;
                 }
                 scope.$apply(function() {
                     // scope.$eval(attrs.next); 
                     scope.nextFn();
-                    didReachLeftOrRight = false;
+                    didReachRight = false;
                     //  scale = 1;
 
                 });
