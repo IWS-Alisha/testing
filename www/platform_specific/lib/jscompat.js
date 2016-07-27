@@ -1,1 +1,0 @@
-// Empty for all platforms, but windows (see merges/windows).
